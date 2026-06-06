@@ -168,6 +168,80 @@ footer{
     display:none !important;
 }
 
+
+.timeline{
+    display:flex;
+    flex-direction:column;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:20px;
+    padding:14px 0;
+    border-bottom:1px solid rgba(0,0,0,0.08);
+}
+
+.timeline-item:last-child{
+    border-bottom:none;
+}
+
+.timeline-date{
+    font-weight:700;
+    color:var(--accent);
+    white-space:nowrap;
+}
+
+.timeline-content{
+    font-size:1rem;
+}
+
+.pub-tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab-btn{
+    border:none;
+    cursor:pointer;
+    padding:10px 20px;
+    border-radius:8px;
+    background:#d9d9d9;
+    font-weight:600;
+}
+
+.tab-btn.active{
+    background:var(--primary);
+    color:white;
+}
+
+.pub-content{
+    display:none;
+}
+
+.pub-content.active{
+    display:block;
+}
+
+.contact-links a{
+    color:var(--accent);
+    text-decoration:none;
+}
+
+.contact-links a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:768px){
+
+.timeline-item{
+    grid-template-columns:1fr;
+    gap:5px;
+}
+}
+
+
 .lang{
     display:block;
 }
@@ -226,6 +300,8 @@ header h1{
                 <span class="lang en hidden">Profile</span>
             </a>
 
+
+
             <a href="#research">
                 <span class="lang ja">研究内容</span>
                 <span class="lang en hidden">Research</span>
@@ -242,9 +318,14 @@ header h1{
             </a>
 
             <a href="#publications">
-                <span class="lang ja">研究業績</span>
+                <span class="lang ja">論文・発表</span>
                 <span class="lang en hidden">Publications</span>
             </a>
+
+            <a href="#career">
+                <span class="lang ja">経歴</span>
+                <span class="lang en hidden">Education</span>
+            </a>            
 
             <a href="#contact">
                 <span class="lang ja">連絡先</span>
@@ -300,6 +381,10 @@ aiming to improve functionality and display performance.
 
 </div>
 </section>
+
+
+
+
 
 <section id="research">
 
@@ -461,26 +546,126 @@ HTML / CSS / JavaScript
 <section id="publications">
 
 <h2 class="section-title">
-<span class="lang ja">研究業績</span>
+<span class="lang ja">論文・発表</span>
 <span class="lang en hidden">Publications</span>
 </h2>
 
 <div class="card">
 
-<p>
-<span class="lang ja"><strong>学会発表・論文</strong></span>
-<span class="lang en hidden"><strong>Conference Papers & Publications</strong></span>
-</p>
+<div class="pub-tabs">
 
-<br>
+<button
+class="tab-btn active"
+onclick="showPubTab('papers',this)">
 
-<ul>
-<li>
-Oikawa, M. et al.,
-"Performance Improvement of a Low-Cost Holographic Television System",
-2026.
-</li>
-</ul>
+<span class="lang ja">論文</span>
+<span class="lang en hidden">Papers</span>
+
+</button>
+
+<button
+class="tab-btn"
+onclick="showPubTab('conference',this)">
+
+<span class="lang ja">学会発表</span>
+<span class="lang en hidden">Conference</span>
+
+</button>
+
+</div>
+
+<div id="papers" class="pub-content active">
+<ul id="paper-list"></ul>
+</div>
+
+<div id="conference" class="pub-content">
+<ul id="conference-list"></ul>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="career">
+
+<h2 class="section-title">
+    <span class="lang ja">経歴</span>
+    <span class="lang en hidden">Education</span>
+</h2>
+
+<div class="card">
+
+<div class="timeline">
+
+
+<div class="timeline-item">
+    <div class="timeline-date">2019.04</div>
+    <div class="timeline-content">
+        <span class="lang ja">
+            宮城県仙台第一高等学校 入学
+        </span>
+        <span class="lang en hidden">
+            Entered Miyagi Prefecture Sendai Daiichi High School
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="timeline-date">2022.03</div>
+    <div class="timeline-content">
+        <span class="lang ja">
+            宮城県仙台第一高等学校 卒業
+        </span>
+        <span class="lang en hidden">
+            Graduated from Miyagi Prefecture Sendai Daiichi High School
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="timeline-date">2022.04</div>
+    <div class="timeline-content">
+        <span class="lang ja">
+            日本大学 理工学部 応用情報工学科 入学
+        </span>
+        <span class="lang en hidden">
+            Entered Nihon University,
+            College of Science and Technology,
+            Computer Engineerring
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="timeline-date">2026.03</div>
+    <div class="timeline-content">
+        <span class="lang ja">
+            日本大学 理工学部 応用情報工学科 卒業
+        </span>
+        <span class="lang en hidden">
+            Graduated from Nihon University,
+            College of Science and Technology,
+            Computer Engineerring
+        </span>
+    </div>
+</div>
+
+<div class="timeline-item">
+    <div class="timeline-date">2026.04</div>
+    <div class="timeline-content">
+        <span class="lang ja">
+            日本大学大学院 理工学研究科 情報科学専攻 入学
+        </span>
+        <span class="lang en hidden">
+            Entered Graduate School of Science and Technology,
+            Computer Science,
+            Nihon University
+        </span>
+    </div>
+</div>
+
+</div>
 
 </div>
 
@@ -509,12 +694,27 @@ Yoshikawa-Yamaguchi Laboratory
 </span>
 </p>
 
-<p>Email: csmk26006@g.nihon-u.ac.jp</p>
-<p>GitHub: https://github.com/Makoto-O-holo</p>
+<p>
+📧
+<a href="mailto:csmk26006@g.nihon-u.ac.jp">
+csmk26006@g.nihon-u.ac.jp
+</a>
+</p>
+<p>
+💻
+<a
+href="https://github.com/Makoto-O-holo"
+target="_blank"
+rel="noopener noreferrer">
+GitHub
+</a>
+</p>
+
 
 </div>
 
 </section>
+
 
 </div>
 
@@ -585,6 +785,90 @@ function toggleTheme(){
     }else{
         document.body.dataset.theme="dark";
     }
+
+    const papers = [
+
+    {
+    title:
+    'Performance Improvement of a Low-Cost Holographic Television System',
+    year:'2026'
+    }
+
+    ];
+
+    const conferences = [
+
+    ];
+
+    function renderPublications(){
+
+    const paperList =
+    document.getElementById("paper-list");
+
+    const conferenceList =
+    document.getElementById("conference-list");
+
+    paperList.innerHTML = "";
+    conferenceList.innerHTML = "";
+
+    papers.forEach(p=>{
+
+    paperList.innerHTML += `
+    <li>
+    ${p.title} (${p.year})
+    </li>
+    `;
+
+    });
+
+    if(conferences.length===0){
+
+    conferenceList.innerHTML=`
+    <li>
+    <span class="lang ja">現在登録なし</span>
+    <span class="lang en hidden">No presentations yet.</span>
+    </li>
+    `;
+
+    }else{
+
+    conferences.forEach(c=>{
+
+    conferenceList.innerHTML += `
+    <li>
+    ${c.title} (${c.year})
+    </li>
+    `;
+
+    });
+
+    }
+    }
+
+    function showPubTab(tabId,btn){
+
+    document
+    .querySelectorAll(".pub-content")
+    .forEach(tab=>{
+    tab.classList.remove("active");
+    });
+
+    document
+    .querySelectorAll(".tab-btn")
+    .forEach(tab=>{
+    tab.classList.remove("active");
+    });
+
+    document
+    .getElementById(tabId)
+    .classList.add("active");
+
+    btn.classList.add("active");
+    }
+
+    renderPublications();
+
+
 }
 
 </script>
