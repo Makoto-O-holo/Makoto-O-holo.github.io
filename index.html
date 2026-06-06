@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研究ポートフォリオ | Makoto Oikawa</title>
+
+<style>
+:root{
+    --primary:#1f3b5b;
+    --secondary:#355c7d;
+    --accent:#5b8fd9;
+    --bg:#f4f6f9;
+    --card:#ffffff;
+    --text:#222;
+    --sub:#666;
+    --shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"]{
+    --bg:#111827;
+    --card:#1f2937;
+    --text:#f3f4f6;
+    --sub:#cbd5e1;
+    --primary:#7db2ff;
+    --secondary:#93c5fd;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        "Segoe UI",
+        "Yu Gothic",
+        "Hiragino Sans",
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.8;
+}
+
+header{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+header p{
+    font-size:1.1rem;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    padding:8px 14px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    background:transparent;
+    cursor:pointer;
+    color:var(--text);
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+section{
+    margin-bottom:60px;
+}
+
+.section-title{
+    font-size:2rem;
+    margin-bottom:20px;
+    padding-left:12px;
+    border-left:5px solid var(--accent);
+    color:var(--primary);
+}
+
+.card{
+    background:var(--card);
+    padding:25px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.project,
+.skill{
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.project h3,
+.skill h3{
+    margin-bottom:10px;
+}
+
+ul{
+    margin-left:20px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:var(--sub);
+}
+
+.hidden{
+    display:none !important;
+}
+
+.lang{
+    display:block;
+}
+
+@media(max-width:768px){
+
+header h1{
+    font-size:2.2rem;
+}
+
+.nav-container{
+    flex-direction:column;
+    gap:15px;
+}
+
+.nav-links{
+    justify-content:center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>
+       <span class="lang ja">
+            及川　真琴
+        </span>
+
+        <span class="lang en hidden">
+            Makoto Oikawa
+        </span>
+    </h1>
+
+    <p>
+        <span class="lang ja">
+            日本大学大学院 理工学研究科 情報科学専攻
+        </span>
+
+        <span class="lang en hidden">
+            Graduate School of Science and Technology,
+            Nihon University<br>
+            Department of Computer Science
+        </span>
+    </p>
+</header>
+
+<nav>
+    <div class="nav-container">
+
+        <div class="nav-links">
+
+            <a href="#profile">
+                <span class="lang ja">プロフィール</span>
+                <span class="lang en hidden">Profile</span>
+            </a>
+
+            <a href="#research">
+                <span class="lang ja">研究内容</span>
+                <span class="lang en hidden">Research</span>
+            </a>
+
+            <a href="#projects">
+                <span class="lang ja">研究・開発</span>
+                <span class="lang en hidden">Projects</span>
+            </a>
+
+            <a href="#skills">
+                <span class="lang ja">スキル</span>
+                <span class="lang en hidden">Skills</span>
+            </a>
+
+            <a href="#publications">
+                <span class="lang ja">研究業績</span>
+                <span class="lang en hidden">Publications</span>
+            </a>
+
+            <a href="#contact">
+                <span class="lang ja">連絡先</span>
+                <span class="lang en hidden">Contact</span>
+            </a>
+
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="langBtn" onclick="toggleLanguage()">English</button>
+            <button class="btn" onclick="toggleTheme()">🌙</button>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container">
+
+<section id="profile">
+
+<h2 class="section-title">
+    <span class="lang ja">プロフィール</span>
+    <span class="lang en hidden">Profile</span>
+</h2>
+
+<div class="card">
+
+<p class="lang ja">
+日本大学大学院理工学研究科情報科学専攻 修士課程1年。
+吉川・山口研究室に所属し、
+コンピュータホログラフィおよびホログラフィックテレビジョンの研究に取り組んでいます。
+</p>
+
+<p class="lang en hidden">
+Master's student in the Department of Computer Science,
+Graduate School of Science and Technology, Nihon University.
+Member of the Yoshikawa-Yamaguchi Laboratory,
+conducting research on computer holography and holographic television systems.
+</p>
+
+<br>
+
+<p class="lang ja">
+特に、高額な専用光学機器を使用しない安価な再生光学系を対象とし、
+ホログラフィックテレビジョンの機能追加および性能向上を目指しています。
+</p>
+
+<p class="lang en hidden">
+My research focuses on enhancing low-cost holographic television systems
+that do not require expensive dedicated optical equipment,
+aiming to improve functionality and display performance.
+</p>
+
+</div>
+</section>
+
+<section id="research">
+
+<h2 class="section-title">
+<span class="lang ja">研究内容</span>
+<span class="lang en hidden">Research</span>
+</h2>
+
+<div class="card">
+
+<h3>
+<span class="lang ja">
+高額専用機器を使用しない安価な再生光学系の
+ホログラフィックテレビジョンの機能追加・性能向上
+</span>
+
+<span class="lang en hidden">
+Functionality Enhancement and Performance Improvement
+of Low-Cost Holographic Television Systems
+Without Expensive Dedicated Optical Devices
+</span>
+</h3>
+
+<br>
+
+<p class="lang ja">
+市販LCDパネルを単板SLMとして利用した低コストHoloTVシステムの実用化を目指しています。
+</p>
+
+<p class="lang en hidden">
+This research aims to improve the practicality of low-cost HoloTV systems
+using commercially available LCD panels as single-panel spatial light modulators.
+</p>
+
+<br>
+
+<ul>
+
+<li>
+<span class="lang ja">ガンマ補正による色再現性向上</span>
+<span class="lang en hidden">Color reproduction improvement using gamma correction</span>
+</li>
+
+<li>
+<span class="lang ja">14K LCDによる高解像度化</span>
+<span class="lang en hidden">High-resolution display using 14K LCD panels</span>
+</li>
+
+<li>
+<span class="lang ja">再生画質評価</span>
+<span class="lang en hidden">Reconstructed image quality evaluation</span>
+</li>
+
+<li>
+<span class="lang ja">低コスト光学系の実用化検討</span>
+<span class="lang en hidden">Practical implementation of low-cost optical systems</span>
+</li>
+
+</ul>
+
+</div>
+</section>
+
+<section id="projects">
+
+<h2 class="section-title">
+<span class="lang ja">研究・開発</span>
+<span class="lang en hidden">Projects</span>
+</h2>
+
+<div class="grid">
+
+<div class="project">
+<h3>
+<span class="lang ja">ガンマ補正による色再現性向上</span>
+<span class="lang en hidden">Gamma Correction for Improved Color Reproduction</span>
+</h3>
+</div>
+
+<div class="project">
+<h3>
+<span class="lang ja">14K LCDを用いた高解像度表示</span>
+<span class="lang en hidden">14K High-Resolution Holographic Display</span>
+</h3>
+</div>
+
+<div class="project">
+<h3>
+<span class="lang ja">CGH生成システム開発</span>
+<span class="lang en hidden">CGH Generation System Development</span>
+</h3>
+</div>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<h2 class="section-title">
+<span class="lang ja">スキル</span>
+<span class="lang en hidden">Skills</span>
+</h2>
+
+<div class="grid">
+
+<div class="skill">
+<h3>
+<span class="lang ja">プログラミング</span>
+<span class="lang en hidden">Programming</span>
+</h3>
+
+<p>C / C++<br>Python<br>MATLAB / Octave</p>
+</div>
+
+<div class="skill">
+<h3>
+<span class="lang ja">研究技術</span>
+<span class="lang en hidden">Research Techniques</span>
+</h3>
+
+<p>
+Computer Generated Holography<br>
+Image Processing<br>
+Optical Simulation
+</p>
+</div>
+
+<div class="skill">
+<h3>
+<span class="lang ja">研究・解析</span>
+<span class="lang en hidden">Analysis</span>
+</h3>
+
+<p>
+Data Analysis<br>
+Experiment Design<br>
+Scientific Writing
+</p>
+</div>
+
+<div class="skill">
+<h3>
+<span class="lang ja">開発環境</span>
+<span class="lang en hidden">Development Environment</span>
+</h3>
+
+<p>
+Linux<br>
+Git / GitHub<br>
+HTML / CSS / JavaScript
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="publications">
+
+<h2 class="section-title">
+<span class="lang ja">研究業績</span>
+<span class="lang en hidden">Publications</span>
+</h2>
+
+<div class="card">
+
+<p>
+<span class="lang ja"><strong>学会発表・論文</strong></span>
+<span class="lang en hidden"><strong>Conference Papers & Publications</strong></span>
+</p>
+
+<br>
+
+<ul>
+<li>
+Oikawa, M. et al.,
+"Performance Improvement of a Low-Cost Holographic Television System",
+2026.
+</li>
+</ul>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2 class="section-title">
+<span class="lang ja">連絡先</span>
+<span class="lang en hidden">Contact</span>
+</h2>
+
+<div class="card">
+
+<p>
+<span class="lang ja">
+所属：日本大学大学院 理工学研究科 情報科学専攻<br>
+研究室：吉川・山口研究室
+</span>
+
+<span class="lang en hidden">
+Department of Computer Science,<br>
+Graduate School of Science and Technology,<br>
+Nihon University<br>
+Yoshikawa-Yamaguchi Laboratory
+</span>
+</p>
+
+<p>Email: csmk26006@g.nihon-u.ac.jp</p>
+<p>GitHub: https://github.com/your-account</p>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+
+<span class="lang ja">
+© 2026 Makoto Oikawa | 研究ポートフォリオ
+</span>
+
+<span class="lang en hidden">
+© 2026 Makoto Oikawa | Research Portfolio
+</span>
+
+</footer>
+
+<script>
+
+let currentLang = "ja";
+
+function toggleLanguage(){
+
+    const jaElements =
+        document.querySelectorAll(".ja");
+
+    const enElements =
+        document.querySelectorAll(".en");
+
+    if(currentLang === "ja"){
+
+        jaElements.forEach(el=>{
+            el.classList.add("hidden");
+        });
+
+        enElements.forEach(el=>{
+            el.classList.remove("hidden");
+        });
+
+        document.documentElement.lang = "en";
+
+        document.getElementById("langBtn").textContent =
+            "日本語";
+
+        currentLang = "en";
+
+    }else{
+
+        enElements.forEach(el=>{
+            el.classList.add("hidden");
+        });
+
+        jaElements.forEach(el=>{
+            el.classList.remove("hidden");
+        });
+
+        document.documentElement.lang = "ja";
+
+        document.getElementById("langBtn").textContent =
+            "English";
+
+        currentLang = "ja";
+    }
+}
+
+function toggleTheme(){
+
+    if(document.body.dataset.theme==="dark"){
+        document.body.removeAttribute("data-theme");
+    }else{
+        document.body.dataset.theme="dark";
+    }
+}
+
+</script>
+
+</body>
+</html>
