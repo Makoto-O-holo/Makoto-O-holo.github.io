@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>研究ポートフォリオ | Makoto Oikawa</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --primary:#1f3b5b;
@@ -26,6 +31,13 @@
     --secondary:#93c5fd;
 }
 
+[data-theme="dark"] header{
+    background:#7db2ff;
+    color:#000;
+}
+
+
+
 *{
     margin:0;
     padding:0;
@@ -38,9 +50,10 @@ html{
 
 body{
     font-family:
-        "Segoe UI",
-        "Yu Gothic",
+        "BIZ UDPGothic",
+        "Yu Gothic UI",
         "Hiragino Sans",
+        "Noto Sans JP",
         sans-serif;
     background:var(--bg);
     color:var(--text);
@@ -224,13 +237,21 @@ footer{
     display:block;
 }
 
-.contact-links a{
-    color:var(--accent);
+#contact a{
+    color:#2563eb;
     text-decoration:none;
 }
 
-.contact-links a:hover{
+#contact a:hover{
     text-decoration:underline;
+}
+
+[data-theme="dark"] #contact a{
+    color:#7dd3fc !important;
+}
+
+[data-theme="dark"] #contact a:hover{
+    color:#bae6fd !important;
 }
 
 @media(max-width:768px){
@@ -312,15 +333,15 @@ header h1{
                 <span class="lang en hidden">Projects</span>
             </a>
 
-            <a href="#skills">
-                <span class="lang ja">スキル</span>
-                <span class="lang en hidden">Skills</span>
-            </a>
-
             <a href="#publications">
                 <span class="lang ja">論文・発表</span>
                 <span class="lang en hidden">Publications</span>
             </a>
+
+            <a href="#skills">
+                <span class="lang ja">スキル</span>
+                <span class="lang en hidden">Skills</span>
+            </a>            
 
             <a href="#career">
                 <span class="lang ja">経歴</span>
@@ -354,14 +375,14 @@ header h1{
 <div class="card">
 
 <p class="lang ja">
-日本大学大学院理工学研究科情報科学専攻 修士課程1年。
+日本大学大学院理工学研究科情報科学専攻 修士課程1年。<br>
 吉川・山口研究室に所属し、
 コンピュータホログラフィおよびホログラフィックテレビジョンの研究に取り組んでいます。
 </p>
 
 <p class="lang en hidden">
 Master's student in the Department of Computer Science,
-Graduate School of Science and Technology, Nihon University.
+Graduate School of Science and Technology, Nihon University.<br>
 Member of the Yoshikawa-Yamaguchi Laboratory,
 conducting research on computer holography and holographic television systems.
 </p>
@@ -482,6 +503,63 @@ using commercially available LCD panels as single-panel spatial light modulators
 
 </section>
 
+
+<section id="publications">
+
+<h2 class="section-title">
+<span class="lang ja">論文・発表</span>
+<span class="lang en hidden">Publications</span>
+</h2>
+
+<div class="card">
+
+<div class="pub-tabs">
+
+<button class="tab-btn active"
+onclick="showPubTab('conference',this)">
+
+<span class="lang ja">学会発表</span>
+<span class="lang en hidden">Conference</span>
+
+</button>
+
+<button class="tab-btn"
+onclick="showPubTab('papers',this)">
+
+<span class="lang ja">論文</span>
+<span class="lang en hidden">Papers</span>
+
+</button>
+
+<button class="tab-btn"
+onclick="showPubTab('awards',this)">
+
+<span class="lang ja">学内受賞</span>
+<span class="lang en hidden">University Awards</span>
+
+</button>
+
+</div>
+
+
+<div id="conference" class="pub-content">
+<ul id="conference-list"></ul>
+</div>
+
+<div id="papers" class="pub-content active">
+<ul id="paper-list"></ul>
+</div>
+
+<div id="awards" class="pub-content">
+    <ul id="award-list"></ul>
+</div>
+
+
+</div>
+
+</section>
+
+
 <section id="skills">
 
 <h2 class="section-title">
@@ -497,32 +575,11 @@ using commercially available LCD panels as single-panel spatial light modulators
 <span class="lang en hidden">Programming</span>
 </h3>
 
-<p>C / C++<br>Python<br>MATLAB / Octave</p>
-</div>
-
-<div class="skill">
-<h3>
-<span class="lang ja">研究技術</span>
-<span class="lang en hidden">Research Techniques</span>
-</h3>
-
 <p>
-Computer Generated Holography<br>
-Image Processing<br>
-Optical Simulation
-</p>
-</div>
-
-<div class="skill">
-<h3>
-<span class="lang ja">研究・解析</span>
-<span class="lang en hidden">Analysis</span>
-</h3>
-
-<p>
-Data Analysis<br>
-Experiment Design<br>
-Scientific Writing
+    C / C++<br>
+    Python<br>
+    HTML / CSS <br>
+    JavaScript
 </p>
 </div>
 
@@ -533,53 +590,9 @@ Scientific Writing
 </h3>
 
 <p>
-Linux<br>
 Git / GitHub<br>
-HTML / CSS / JavaScript
+VS Code / Visual Studio
 </p>
-</div>
-
-</div>
-
-</section>
-
-<section id="publications">
-
-<h2 class="section-title">
-<span class="lang ja">論文・発表</span>
-<span class="lang en hidden">Publications</span>
-</h2>
-
-<div class="card">
-
-<div class="pub-tabs">
-
-<button
-class="tab-btn active"
-onclick="showPubTab('papers',this)">
-
-<span class="lang ja">論文</span>
-<span class="lang en hidden">Papers</span>
-
-</button>
-
-<button
-class="tab-btn"
-onclick="showPubTab('conference',this)">
-
-<span class="lang ja">学会発表</span>
-<span class="lang en hidden">Conference</span>
-
-</button>
-
-</div>
-
-<div id="papers" class="pub-content active">
-<ul id="paper-list"></ul>
-</div>
-
-<div id="conference" class="pub-content">
-<ul id="conference-list"></ul>
 </div>
 
 </div>
@@ -734,6 +747,55 @@ GitHub
 
 let currentLang = "ja";
 
+const conferences = [
+
+    {
+        authors:
+        "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
+        title:
+        "Real-time calculation and display of 14K rainbow hologram on transmission liquid crystal panel",
+        conference:
+        "SPIE Practical Holography XXXX",
+        citation:
+        "Vol.13917, 1391707",
+        date:
+        "Jan. 20, 2026"
+    },
+
+    {
+        authors:
+        "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
+        title:
+        "Computer-Generated Rainbow Hologram from Point Cloud Obtained by NeRF",
+        conference:
+        "Digital Holography and Three-Dimensional Imaging (DH) 2025",
+        citation:
+        "DTh3A.2",
+        date:
+        "Aug. 21, 2025"
+    }
+
+];
+const papers = [
+
+    
+
+];
+
+const awards = [
+
+    {
+        date:"2026.03",
+        title:"優等賞"
+    },
+
+    {
+        date:"2026.03",
+        title:"応用情報工学科賞"
+    }
+
+];
+
 function toggleLanguage(){
 
     const jaElements =
@@ -786,21 +848,9 @@ function toggleTheme(){
         document.body.dataset.theme="dark";
     }
 
-    const papers = [
+}
 
-    {
-    title:
-    'Performance Improvement of a Low-Cost Holographic Television System',
-    year:'2026'
-    }
-
-    ];
-
-    const conferences = [
-
-    ];
-
-    function renderPublications(){
+function renderPublications(){
 
     const paperList =
     document.getElementById("paper-list");
@@ -808,14 +858,20 @@ function toggleTheme(){
     const conferenceList =
     document.getElementById("conference-list");
 
-    paperList.innerHTML = "";
-    conferenceList.innerHTML = "";
+    const awardList =
+    document.getElementById("award-list");
+
+    paperList.innerHTML="";
+    conferenceList.innerHTML="";
+    awardList.innerHTML="";
 
     papers.forEach(p=>{
 
     paperList.innerHTML += `
-    <li>
-    ${p.title} (${p.year})
+    <li style="margin-bottom:18px;">
+    <strong>${p.title}</strong><br>
+    ${p.authors}<br>
+    <em>${p.journal}</em>, ${p.year}
     </li>
     `;
 
@@ -823,29 +879,73 @@ function toggleTheme(){
 
     if(conferences.length===0){
 
-    conferenceList.innerHTML=`
-    <li>
-    <span class="lang ja">現在登録なし</span>
-    <span class="lang en hidden">No presentations yet.</span>
-    </li>
-    `;
+        conferenceList.innerHTML=`
+        <li>
+        <span class="lang ja">現在登録なし</span>
+        <span class="lang en hidden">No presentations yet.</span>
+        </li>
+        `;
 
     }else{
 
-    conferences.forEach(c=>{
+        conferences.forEach(c=>{
 
-    conferenceList.innerHTML += `
-    <li>
-    ${c.title} (${c.year})
-    </li>
-    `;
+        conferenceList.innerHTML += `
+        <li style="margin-bottom:20px;">
+
+        <strong>
+        ${c.title}
+        </strong>
+
+        <br>
+
+        ${c.authors}
+
+        <br>
+
+        <em>
+        ${c.conference}
+        </em>
+
+        <br>
+
+        ${c.citation}
+
+        <br>
+
+        ${c.date}
+
+        </li>
+        `;
+        });
+    }
+
+    if(awards.length===0){
+
+        awardList.innerHTML=`
+        <li>現在登録なし</li>
+        `;
+
+    }else{
+
+        awards.forEach(a=>{
+
+        awardList.innerHTML += `
+        <li style="margin-bottom:18px;">
+
+        ${a.date}
+        ${a.title}
+
+        </li>
+        `;
 
     });
 
     }
-    }
 
-    function showPubTab(tabId,btn){
+}
+
+function showPubTab(tabId,btn){
 
     document
     .querySelectorAll(".pub-content")
@@ -864,12 +964,36 @@ function toggleTheme(){
     .classList.add("active");
 
     btn.classList.add("active");
-    }
-
-    renderPublications();
-
-
 }
+
+function initializePublicationTab(){
+
+    document
+    .querySelectorAll(".pub-content")
+    .forEach(tab=>{
+        tab.classList.remove("active");
+    });
+
+    document
+    .querySelectorAll(".tab-btn")
+    .forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    document
+    .getElementById("conference")
+    .classList.add("active");
+
+    document
+    .querySelector(".tab-btn")
+    .classList.add("active");
+}
+
+renderPublications();
+initializePublicationTab();
+
+
+
 
 </script>
 
