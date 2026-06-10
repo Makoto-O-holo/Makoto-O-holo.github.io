@@ -48,50 +48,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── HOLOGRAPHIC HEADER ─── */
+/* ─── HERO HEADER ─── */
 header {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 0 72px 0;
   overflow: hidden;
-  background: var(--ink);
+  background: #0d0d10;
+  padding: 96px 0 80px;
 }
 
-.holo-canvas {
+#holo-canvas {
   position: absolute;
   inset: 0;
-  opacity: 0.55;
-}
-
-/* SVG diffraction grating pattern */
-.holo-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      105deg,
-      transparent 0px,
-      transparent 3px,
-      rgba(0,180,170,0.04) 3px,
-      rgba(0,180,170,0.04) 4px
-    ),
-    repeating-linear-gradient(
-      -15deg,
-      transparent 0px,
-      transparent 5px,
-      rgba(124,108,245,0.03) 5px,
-      rgba(124,108,245,0.03) 6px
-    );
-  animation: holo-shift 12s ease-in-out infinite alternate;
-}
-
-@keyframes holo-shift {
-  0%   { background-position: 0 0, 0 0; filter: hue-rotate(0deg); }
-  50%  { background-position: 60px 30px, -40px 20px; filter: hue-rotate(30deg); }
-  100% { background-position: 120px 0, -80px 0; filter: hue-rotate(0deg); }
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
 }
 
 .header-inner {
@@ -101,7 +71,13 @@ header {
   margin: 0 auto;
   padding: 0 48px;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 40px;
 }
+
+.header-left {}
 
 .header-eyebrow {
   font-family: var(--ff-mono);
@@ -109,55 +85,76 @@ header {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fade-up 0.6s 0.1s ease forwards;
 }
 
 header h1 {
   font-family: var(--ff-display);
-  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-size: clamp(3.2rem, 6vw, 5.2rem);
   font-weight: 500;
   color: #f0efe9;
   line-height: 1.05;
   letter-spacing: -0.01em;
   margin-bottom: 20px;
+  opacity: 0;
+  animation: fade-up 0.7s 0.25s ease forwards;
 }
 
 header h1 em {
-  display: block;
+  display: inline;
   font-style: normal;
   color: var(--accent);
 }
 
 .header-sub {
-  font-size: 14px;
-  color: rgba(240,239,233,0.55);
+  font-size: 13px;
+  color: rgba(240,239,233,0.45);
   letter-spacing: 0.02em;
   max-width: 480px;
-  line-height: 1.7;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fade-up 0.7s 0.4s ease forwards;
 }
 
-.header-scroll {
-  position: absolute;
-  bottom: 32px;
-  right: 48px;
-  z-index: 2;
+.header-right {
+  text-align: right;
+  opacity: 0;
+  animation: fade-up 0.7s 0.5s ease forwards;
+}
+
+.header-stat {
+  margin-bottom: 20px;
+}
+
+.header-stat-num {
+  font-family: var(--ff-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: #f0efe9;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.header-stat-label {
   font-family: var(--ff-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(240,239,233,0.35);
-  writing-mode: vertical-rl;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  margin-top: 4px;
 }
 
-.header-scroll::before {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, transparent, rgba(240,239,233,0.3));
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header h1, .header-eyebrow, .header-sub, .header-right {
+    animation: none; opacity: 1;
+  }
 }
 
 /* ─── NAV ─── */
@@ -753,7 +750,8 @@ footer {
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
   .site-body { padding: 0 24px 80px; }
-  .header-inner { padding: 0 24px; }
+  .header-inner { padding: 0 24px; grid-template-columns: 1fr; }
+  .header-right { display: flex; gap: 32px; text-align: left; }
   .nav-inner { padding: 0 24px; }
   .nav-links { display: none; }
   .section {
@@ -767,7 +765,6 @@ footer {
 
 @media (max-width: 640px) {
   header h1 { font-size: 2.8rem; }
-  .header-scroll { display: none; }
   .pub-item { grid-template-columns: 1fr; gap: 4px; }
   .contact-grid { grid-template-columns: 1fr; }
   .timeline::before { left: 99px; }
@@ -790,24 +787,21 @@ footer {
 
 <!-- ─── HEADER ─── -->
 <header>
-  <div class="holo-bg"></div>
+  <canvas id="holo-canvas"></canvas>
   <div class="header-inner">
-    <p class="header-eyebrow">
-      <span class="lang ja">研究ポートフォリオ</span>
-      <span class="lang en hidden">Research Portfolio</span>
-    </p>
-    <h1>
-      <span class="lang ja">及川<br><em>真琴</em></span>
-      <span class="lang en hidden">Makoto<br><em>Oikawa</em></span>
-    </h1>
-    <p class="header-sub">
-      <span class="lang ja">日本大学大学院 理工学研究科 情報科学専攻<br>コンピュータホログラフィ / ホログラフィックテレビジョン</span>
-      <span class="lang en hidden">Graduate School of Science and Technology,<br>Nihon University — Computer Holography &amp; Holographic Television</span>
-    </p>
-  </div>
-  <div class="header-scroll">
-    <span class="lang ja">スクロール</span>
-    <span class="lang en hidden">Scroll</span>
+    <div class="header-left">
+      <p class="header-eyebrow">
+        <span class="lang en hidden">Researcher &amp; Developer</span>
+      </p>
+      <h1>
+        <span class="lang ja">及川 <em>真琴</em></span>
+        <span class="lang en hidden">Makoto <em>Oikawa</em></span>
+      </h1>
+      <p class="header-sub">
+        <span class="lang ja">日本大学大学院 理工学研究科 情報科学専攻<br>コンピュータホログラフィ / ホログラフィックテレビジョン</span>
+        <span class="lang en hidden">Graduate School of Science and Technology, Nihon University<br>Computer Holography &amp; Holographic Television</span>
+      </p>
+    </div>
   </div>
 </header>
 
@@ -1269,6 +1263,98 @@ function toggleTheme() {
 
 /* ── INIT ── */
 renderPublications();
+
+/* ── HOLOGRAPHIC CANVAS ── */
+(function() {
+  const canvas = document.getElementById('holo-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+  let mx = 0.5, my = 0.5;
+
+  function resize() {
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    canvas.width  = W;
+    canvas.height = H;
+  }
+
+  // Two coherent point sources — interference pattern like holography
+  function draw() {
+    t += 0.008;
+    ctx.clearRect(0, 0, W, H);
+
+    // Dark base
+    ctx.fillStyle = '#0d0d10';
+    ctx.fillRect(0, 0, W, H);
+
+    const imgData = ctx.createImageData(W, H);
+    const d = imgData.data;
+
+    // Source positions that drift slowly + follow mouse
+    const s1x = W * (0.28 + 0.06 * Math.sin(t * 0.7) + (mx - 0.5) * 0.08);
+    const s1y = H * (0.45 + 0.04 * Math.cos(t * 0.5));
+    const s2x = W * (0.72 + 0.05 * Math.cos(t * 0.6) + (mx - 0.5) * 0.08);
+    const s2y = H * (0.55 + 0.06 * Math.sin(t * 0.8) + (my - 0.5) * 0.06);
+
+    const k = 0.045; // spatial frequency (fringe density)
+
+    for (let y = 0; y < H; y += 2) {
+      for (let x = 0; x < W; x += 2) {
+        const r1 = Math.sqrt((x - s1x) ** 2 + (y - s1y) ** 2);
+        const r2 = Math.sqrt((x - s2x) ** 2 + (y - s2y) ** 2);
+
+        // Interference: cos of path difference
+        const phase = k * (r1 - r2) + t * 0.3;
+        const I = 0.5 + 0.5 * Math.cos(phase);
+
+        // Chromatic dispersion — slight wavelength shift per channel
+        const phaseR = k * 0.97 * (r1 - r2) + t * 0.28;
+        const phaseG = k * 1.00 * (r1 - r2) + t * 0.30;
+        const phaseB = k * 1.04 * (r1 - r2) + t * 0.33;
+
+        const iR = (0.5 + 0.5 * Math.cos(phaseR));
+        const iG = (0.5 + 0.5 * Math.cos(phaseG));
+        const iB = (0.5 + 0.5 * Math.cos(phaseB));
+
+        // Radial fade from center
+        const cx = x / W - 0.5, cy = y / H - 0.5;
+        const fade = Math.max(0, 1 - (cx*cx + cy*cy) * 3.2);
+
+        const base = 4; // low ambient so dark background stays dark
+        const amp  = 38;
+
+        const r = Math.round(base + iR * amp * fade);
+        const g = Math.round(base + iG * amp * fade * 1.1);
+        const b = Math.round(base + iB * amp * fade * 1.4); // teal bias
+
+        const i4 = (y * W + x) * 4;
+        // Fill 2x2 block for performance
+        for (let dy = 0; dy < 2 && y+dy < H; dy++) {
+          for (let dx = 0; dx < 2 && x+dx < W; dx++) {
+            const j = ((y+dy) * W + (x+dx)) * 4;
+            d[j]   = r;
+            d[j+1] = g;
+            d[j+2] = b;
+            d[j+3] = 255;
+          }
+        }
+      }
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mx = (e.clientX - rect.left) / rect.width;
+    my = (e.clientY - rect.top)  / rect.height;
+  });
+
+  resize();
+  draw();
+})();
 </script>
 
 </body>
