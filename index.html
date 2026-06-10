@@ -3,998 +3,1272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>研究ポートフォリオ | Makoto Oikawa</title>
-
+<title>Makoto Oikawa | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
-:root{
-    --primary:#1f3b5b;
-    --secondary:#355c7d;
-    --accent:#5b8fd9;
-    --bg:#f4f6f9;
-    --card:#ffffff;
-    --text:#222;
-    --sub:#666;
-    --shadow:0 4px 12px rgba(0,0,0,0.08);
+/* ─── TOKENS ─── */
+:root {
+  --ink:     #1a1a1e;
+  --ink2:    #3d3d45;
+  --muted:   #8a8a96;
+  --bg:      #f7f6f3;
+  --surface: #ffffff;
+  --border:  rgba(26,26,30,0.10);
+  --accent:  #00b4aa;
+  --accent2: #7c6cf5;
+  --rule:    rgba(26,26,30,0.12);
+  --ff-display: 'Cormorant Garant', Georgia, serif;
+  --ff-body:    'Noto Sans JP', sans-serif;
+  --ff-mono:    'Space Mono', monospace;
 }
 
-[data-theme="dark"]{
-    --bg:#111827;
-    --card:#1f2937;
-    --text:#f3f4f6;
-    --sub:#cbd5e1;
-    --primary:#7db2ff;
-    --secondary:#93c5fd;
+[data-theme="dark"] {
+  --ink:     #f0efe9;
+  --ink2:    #c8c8d0;
+  --muted:   #6e6e7a;
+  --bg:      #111114;
+  --surface: #1c1c21;
+  --border:  rgba(240,239,233,0.08);
+  --accent:  #2dd4cc;
+  --accent2: #9d8ff8;
+  --rule:    rgba(240,239,233,0.10);
 }
 
-[data-theme="dark"] header{
-    background:#7db2ff;
-    color:#000;
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.8;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
 }
 
-
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ─── HOLOGRAPHIC HEADER ─── */
+header {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 72px 0;
+  overflow: hidden;
+  background: var(--ink);
 }
 
-html{
-    scroll-behavior:smooth;
+.holo-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
 }
 
-body{
-    font-family:
-        "BIZ UDPGothic",
-        "Yu Gothic UI",
-        "Hiragino Sans",
-        "Noto Sans JP",
-        sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.8;
+/* SVG diffraction grating pattern */
+.holo-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      105deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0,180,170,0.04) 3px,
+      rgba(0,180,170,0.04) 4px
+    ),
+    repeating-linear-gradient(
+      -15deg,
+      transparent 0px,
+      transparent 5px,
+      rgba(124,108,245,0.03) 5px,
+      rgba(124,108,245,0.03) 6px
+    );
+  animation: holo-shift 12s ease-in-out infinite alternate;
 }
 
-header{
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:white;
-    text-align:center;
-    padding:80px 20px;
+@keyframes holo-shift {
+  0%   { background-position: 0 0, 0 0; filter: hue-rotate(0deg); }
+  50%  { background-position: 60px 30px, -40px 20px; filter: hue-rotate(30deg); }
+  100% { background-position: 120px 0, -80px 0; filter: hue-rotate(0deg); }
 }
 
-header h1{
-    font-size:3rem;
-    margin-bottom:10px;
+.header-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
 }
 
-header p{
-    font-size:1.1rem;
+.header-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
 }
 
-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:var(--card);
-    box-shadow:var(--shadow);
+header h1 {
+  font-family: var(--ff-display);
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 500;
+  color: #f0efe9;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
 }
 
-.nav-container{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 20px;
+header h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--accent);
 }
 
-.nav-links{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+.header-sub {
+  font-size: 14px;
+  color: rgba(240,239,233,0.55);
+  letter-spacing: 0.02em;
+  max-width: 480px;
+  line-height: 1.7;
 }
 
-.nav-links a{
-    text-decoration:none;
-    color:var(--text);
-    font-weight:600;
+.header-scroll {
+  position: absolute;
+  bottom: 32px;
+  right: 48px;
+  z-index: 2;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,239,233,0.35);
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.nav-links a:hover{
-    color:var(--accent);
+.header-scroll::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, rgba(240,239,233,0.3));
 }
 
-.controls{
-    display:flex;
-    gap:10px;
+/* ─── NAV ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.btn{
-    padding:8px 14px;
-    border-radius:6px;
-    border:1px solid #ccc;
-    background:transparent;
-    cursor:pointer;
-    color:var(--text);
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
 }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:40px 20px;
+.nav-name {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
 }
 
-section{
-    margin-bottom:60px;
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
 }
 
-.section-title{
-    font-size:2rem;
-    margin-bottom:20px;
-    padding-left:12px;
-    border-left:5px solid var(--accent);
-    color:var(--primary);
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.card{
-    background:var(--card);
-    padding:25px;
-    border-radius:12px;
-    box-shadow:var(--shadow);
+.nav-links a:hover { color: var(--ink); }
+
+.nav-controls {
+  display: flex;
+  gap: 8px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+.ctrl-btn {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  letter-spacing: 0.04em;
 }
 
-.project,
-.skill{
-    background:var(--card);
-    padding:20px;
-    border-radius:12px;
-    box-shadow:var(--shadow);
+.ctrl-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
-.project h3,
-.skill h3{
-    margin-bottom:10px;
+/* ─── LAYOUT ─── */
+.site-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px 120px;
 }
 
-ul{
-    margin-left:20px;
+/* ─── SECTION STRUCTURE ─── */
+.section {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0 64px;
+  padding: 80px 0;
+  border-top: 1px solid var(--rule);
 }
 
-footer{
-    text-align:center;
-    padding:30px;
-    color:var(--sub);
+.section-label {
+  padding-top: 4px;
 }
 
-.hidden{
-    display:none !important;
+.section-tag {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
 }
 
-
-.timeline{
-    display:flex;
-    flex-direction:column;
+.section-num {
+  font-family: var(--ff-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--rule);
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
-.timeline-item{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    gap:20px;
-    padding:14px 0;
-    border-bottom:1px solid rgba(0,0,0,0.08);
+.section-body {
+  min-width: 0;
 }
 
-.timeline-item:last-child{
-    border-bottom:none;
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.timeline-date{
-    font-weight:700;
-    color:var(--accent);
-    white-space:nowrap;
+/* ─── PROFILE ─── */
+.profile-text {
+  font-size: 16px;
+  color: var(--ink2);
+  max-width: 640px;
+  line-height: 1.9;
 }
 
-.timeline-content{
-    font-size:1rem;
+.profile-text + .profile-text {
+  margin-top: 16px;
 }
 
-.pub-tabs{
-    display:flex;
-    gap:10px;
-    margin-bottom:20px;
+/* ─── RESEARCH ─── */
+.research-block {
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
 }
 
-.tab-btn{
-    border:none;
-    cursor:pointer;
-    padding:10px 20px;
-    border-radius:8px;
-    background:#d9d9d9;
-    font-weight:600;
+.research-title {
+  font-family: var(--ff-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
-.tab-btn.active{
-    background:var(--primary);
-    color:white;
+.research-desc {
+  color: var(--ink2);
+  margin-bottom: 20px;
 }
 
-.pub-content{
-    display:none;
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
 }
 
-.pub-content.active{
-    display:block;
+.tag {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
 }
 
-#contact a{
-    color:#2563eb;
-    text-decoration:none;
+/* ─── PROJECTS GRID ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
 }
 
-#contact a:hover{
-    text-decoration:underline;
+.project-card {
+  background: var(--surface);
+  padding: 28px 28px 24px;
+  border: none;
+  position: relative;
+  cursor: default;
+  transition: background 0.2s;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
 }
 
-[data-theme="dark"] #contact a{
-    color:#7dd3fc !important;
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  pointer-events: none;
 }
 
-[data-theme="dark"] #contact a:hover{
-    color:#bae6fd !important;
+.project-card:hover {
+  background: var(--bg);
 }
 
-@media(max-width:768px){
-
-.timeline-item{
-    grid-template-columns:1fr;
-    gap:5px;
-}
+.project-card:hover .project-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
 }
 
-
-.lang{
-    display:block;
+.project-kind {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
 }
 
-@media(max-width:768px){
-
-header h1{
-    font-size:2.2rem;
+.project-name {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 10px;
 }
 
-.nav-container{
-    flex-direction:column;
-    gap:15px;
+.project-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
 }
 
-.nav-links{
-    justify-content:center;
+.project-arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 16px;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
 }
+
+/* ─── PUBLICATIONS ─── */
+.pub-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 32px;
+}
+
+.pub-tab {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px 10px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.pub-tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.pub-panel { display: none; }
+.pub-panel.active { display: block; }
+
+.pub-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 24px;
+}
+
+.pub-item:last-child { border-bottom: none; }
+
+.pub-date {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+.pub-content {}
+
+.pub-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.pub-meta {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pub-meta em {
+  font-style: italic;
+  color: var(--ink2);
+}
+
+.award-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.award-date {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.award-title {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* ─── SKILLS ─── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 32px;
+}
+
+.skill-group-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.skill-list {
+  list-style: none;
+}
+
+.skill-list li {
+  font-size: 14px;
+  color: var(--ink2);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-list li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 119px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 40px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 114px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--rule);
+}
+
+.tl-item.highlight::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.tl-date {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 3px;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+.tl-content {
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+
+.tl-content strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+/* ─── HOBBIES ─── */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.hobby-card {
+  background: var(--surface);
+  padding: 28px;
+  position: relative;
+}
+
+.hobby-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+
+.hobby-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.hobby-name {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.hobby-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.hobby-link {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.hobby-link:hover {
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+
+.wip-badge {
+  display: inline-block;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: transparent;
+  border: 1px solid var(--accent2);
+  color: var(--accent2);
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+
+/* ─── CONTACT ─── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-value {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.contact-value a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.contact-value a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.footer-copy {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.footer-back {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.footer-back:hover { color: var(--ink); }
+
+/* ─── UTILITY ─── */
+.hidden { display: none !important; }
+.lang { display: block; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .site-body { padding: 0 24px 80px; }
+  .header-inner { padding: 0 24px; }
+  .nav-inner { padding: 0 24px; }
+  .nav-links { display: none; }
+  .section {
+    grid-template-columns: 1fr;
+    gap: 20px 0;
+    padding: 56px 0;
+  }
+  .section-num { display: none; }
+  footer { padding-left: 24px; padding-right: 24px; }
+}
+
+@media (max-width: 640px) {
+  header h1 { font-size: 2.8rem; }
+  .header-scroll { display: none; }
+  .pub-item { grid-template-columns: 1fr; gap: 4px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .timeline::before { left: 99px; }
+  .tl-item { grid-template-columns: 100px 1fr; }
+  .tl-item::before { left: 94px; }
+}
+
+/* ─── DARK MODE OVERRIDES ─── */
+[data-theme="dark"] nav {
+  background: rgba(28,28,33,0.92);
+}
+
+[data-theme="dark"] .project-card:hover,
+[data-theme="dark"] .hobby-card:hover {
+  background: rgba(255,255,255,0.02);
 }
 </style>
 </head>
-
 <body>
 
+<!-- ─── HEADER ─── -->
 <header>
-    <h1>
-       <span class="lang ja">
-            及川　真琴
-        </span>
-
-        <span class="lang en hidden">
-            Makoto Oikawa
-        </span>
-    </h1>
-
-    <p>
-        <span class="lang ja">
-            日本大学大学院 理工学研究科 情報科学専攻
-        </span>
-
-        <span class="lang en hidden">
-            Graduate School of Science and Technology,
-            Nihon University<br>
-            Department of Computer Science
-        </span>
+  <div class="holo-bg"></div>
+  <div class="header-inner">
+    <p class="header-eyebrow">
+      <span class="lang ja">研究ポートフォリオ</span>
+      <span class="lang en hidden">Research Portfolio</span>
     </p>
+    <h1>
+      <span class="lang ja">及川<br><em>真琴</em></span>
+      <span class="lang en hidden">Makoto<br><em>Oikawa</em></span>
+    </h1>
+    <p class="header-sub">
+      <span class="lang ja">日本大学大学院 理工学研究科 情報科学専攻<br>コンピュータホログラフィ / ホログラフィックテレビジョン</span>
+      <span class="lang en hidden">Graduate School of Science and Technology,<br>Nihon University — Computer Holography &amp; Holographic Television</span>
+    </p>
+  </div>
+  <div class="header-scroll">
+    <span class="lang ja">スクロール</span>
+    <span class="lang en hidden">Scroll</span>
+  </div>
 </header>
 
+<!-- ─── NAV ─── -->
 <nav>
-    <div class="nav-container">
-
-        <div class="nav-links">
-
-            <a href="#profile">
-                <span class="lang ja">プロフィール</span>
-                <span class="lang en hidden">Profile</span>
-            </a>
-
-
-
-            <a href="#research">
-                <span class="lang ja">研究内容</span>
-                <span class="lang en hidden">Research</span>
-            </a>
-
-            <a href="#projects">
-                <span class="lang ja">研究・開発</span>
-                <span class="lang en hidden">Projects</span>
-            </a>
-
-            <a href="#publications">
-                <span class="lang ja">論文・発表</span>
-                <span class="lang en hidden">Publications</span>
-            </a>
-
-            <a href="#skills">
-                <span class="lang ja">スキル</span>
-                <span class="lang en hidden">Skills</span>
-            </a>            
-
-            <a href="#career">
-                <span class="lang ja">経歴</span>
-                <span class="lang en hidden">Education</span>
-            </a>            
-
-            <a href="#contact">
-                <span class="lang ja">連絡先</span>
-                <span class="lang en hidden">Contact</span>
-            </a>
-
-        </div>
-
-        <div class="controls">
-            <button class="btn" id="langBtn" onclick="toggleLanguage()">English</button>
-            <button class="btn" onclick="toggleTheme()">🌙</button>
-        </div>
-
+  <div class="nav-inner">
+    <a href="#" class="nav-name">M. Oikawa</a>
+    <ul class="nav-links">
+      <li><a href="#profile"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a></li>
+      <li><a href="#research"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a></li>
+      <li><a href="#projects"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></a></li>
+      <li><a href="#publications"><span class="lang ja">発表</span><span class="lang en hidden">Publications</span></a></li>
+      <li><a href="#skills"><span class="lang ja">スキル</span><span class="lang en hidden">Skills</span></a></li>
+      <li><a href="#hobbies"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></a></li>
+      <li><a href="#career"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></a></li>
+      <li><a href="#contact"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="ctrl-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
+      <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">◑</button>
     </div>
+  </div>
 </nav>
 
-<div class="container">
-
-<section id="profile">
-
-<h2 class="section-title">
-    <span class="lang ja">プロフィール</span>
-    <span class="lang en hidden">Profile</span>
-</h2>
-
-<div class="card">
-
-<p class="lang ja">
-日本大学大学院理工学研究科情報科学専攻 修士課程1年。<br>
-吉川・山口研究室に所属し、
-コンピュータホログラフィおよびホログラフィックテレビジョンの研究に取り組んでいます。
-</p>
-
-<p class="lang en hidden">
-Master's student in the Department of Computer Science,
-Graduate School of Science and Technology, Nihon University.<br>
-Member of the Yoshikawa-Yamaguchi Laboratory,
-conducting research on computer holography and holographic television systems.
-</p>
-
-<br>
-
-<p class="lang ja">
-特に、高額な専用光学機器を使用しない安価な再生光学系を対象とし、
-ホログラフィックテレビジョンの機能追加および性能向上を目指しています。
-</p>
-
-<p class="lang en hidden">
-My research focuses on enhancing low-cost holographic television systems
-that do not require expensive dedicated optical equipment,
-aiming to improve functionality and display performance.
-</p>
-
-</div>
-</section>
-
-
-
-
-
-<section id="research">
-
-<h2 class="section-title">
-<span class="lang ja">研究内容</span>
-<span class="lang en hidden">Research</span>
-</h2>
-
-<div class="card">
-
-<h3>
-<span class="lang ja">
-高額専用機器を使用しない安価な再生光学系の
-ホログラフィックテレビジョンの機能追加・性能向上
-</span>
-
-<span class="lang en hidden">
-Functionality Enhancement and Performance Improvement
-of Low-Cost Holographic Television Systems
-Without Expensive Dedicated Optical Devices
-</span>
-</h3>
-
-<br>
-
-<p class="lang ja">
-市販LCDパネルを単板SLMとして利用した低コストHoloTVシステムの実用化を目指しています。
-</p>
-
-<p class="lang en hidden">
-This research aims to improve the practicality of low-cost HoloTV systems
-using commercially available LCD panels as single-panel spatial light modulators.
-</p>
-
-<br>
-
-<ul>
-
-<li>
-<span class="lang ja">ガンマ補正による色再現性向上</span>
-<span class="lang en hidden">Color reproduction improvement using gamma correction</span>
-</li>
-
-<li>
-<span class="lang ja">14K LCDによる高解像度化</span>
-<span class="lang en hidden">High-resolution display using 14K LCD panels</span>
-</li>
-
-<li>
-<span class="lang ja">再生画質評価</span>
-<span class="lang en hidden">Reconstructed image quality evaluation</span>
-</li>
-
-<li>
-<span class="lang ja">低コスト光学系の実用化検討</span>
-<span class="lang en hidden">Practical implementation of low-cost optical systems</span>
-</li>
-
-</ul>
-
-</div>
-</section>
-
-<section id="projects">
-
-<h2 class="section-title">
-<span class="lang ja">研究・開発</span>
-<span class="lang en hidden">Projects</span>
-</h2>
-
-<div class="grid">
-
-<div class="project">
-<h3>
-<span class="lang ja">ガンマ補正による色再現性向上</span>
-<span class="lang en hidden">Gamma Correction for Improved Color Reproduction</span>
-</h3>
-</div>
-
-<div class="project">
-<h3>
-<span class="lang ja">14K LCDを用いた高解像度表示</span>
-<span class="lang en hidden">14K High-Resolution Holographic Display</span>
-</h3>
-</div>
-
-<div class="project">
-<h3>
-<span class="lang ja">CGH生成システム開発</span>
-<span class="lang en hidden">CGH Generation System Development</span>
-</h3>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="publications">
-
-<h2 class="section-title">
-<span class="lang ja">論文・発表</span>
-<span class="lang en hidden">Publications</span>
-</h2>
-
-<div class="card">
-
-<div class="pub-tabs">
-
-<button class="tab-btn active"
-onclick="showPubTab('conference',this)">
-
-<span class="lang ja">学会発表</span>
-<span class="lang en hidden">Conference</span>
-
-</button>
-
-<button class="tab-btn"
-onclick="showPubTab('papers',this)">
-
-<span class="lang ja">論文</span>
-<span class="lang en hidden">Papers</span>
-
-</button>
-
-<button class="tab-btn"
-onclick="showPubTab('awards',this)">
-
-<span class="lang ja">学内受賞</span>
-<span class="lang en hidden">University Awards</span>
-
-</button>
-
-</div>
-
-
-<div id="conference" class="pub-content">
-<ul id="conference-list"></ul>
-</div>
-
-<div id="papers" class="pub-content active">
-<ul id="paper-list"></ul>
-</div>
-
-<div id="awards" class="pub-content">
-    <ul id="award-list"></ul>
-</div>
-
-
-</div>
-
-</section>
-
-
-<section id="skills">
-
-<h2 class="section-title">
-<span class="lang ja">スキル</span>
-<span class="lang en hidden">Skills</span>
-</h2>
-
-<div class="grid">
-
-<div class="skill">
-<h3>
-<span class="lang ja">プログラミング</span>
-<span class="lang en hidden">Programming</span>
-</h3>
-
-<p>
-    C / C++<br>
-    Python<br>
-    HTML / CSS <br>
-    JavaScript
-</p>
-</div>
-
-<div class="skill">
-<h3>
-<span class="lang ja">開発環境</span>
-<span class="lang en hidden">Development Environment</span>
-</h3>
-
-<p>
-Git / GitHub<br>
-VS Code / Visual Studio
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="career">
-
-<h2 class="section-title">
-    <span class="lang ja">経歴</span>
-    <span class="lang en hidden">Education</span>
-</h2>
-
-<div class="card">
-
-<div class="timeline">
-
-
-<div class="timeline-item">
-    <div class="timeline-date">2019.04</div>
-    <div class="timeline-content">
-        <span class="lang ja">
-            宮城県仙台第一高等学校 入学
-        </span>
-        <span class="lang en hidden">
-            Entered Miyagi Prefecture Sendai Daiichi High School
-        </span>
+<!-- ─── BODY ─── -->
+<main class="site-body">
+
+  <!-- PROFILE -->
+  <section id="profile" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">紹介</span><span class="lang en hidden">About</span></span>
+      <span class="section-num">01</span>
     </div>
-</div>
-
-<div class="timeline-item">
-    <div class="timeline-date">2022.03</div>
-    <div class="timeline-content">
-        <span class="lang ja">
-            宮城県仙台第一高等学校 卒業
-        </span>
-        <span class="lang en hidden">
-            Graduated from Miyagi Prefecture Sendai Daiichi High School
-        </span>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">プロフィール</span>
+        <span class="lang en hidden">Profile</span>
+      </h2>
+      <p class="profile-text lang ja">
+        日本大学大学院理工学研究科情報科学専攻 修士課程1年。<br>
+        吉川・山口研究室に所属し、コンピュータホログラフィおよびホログラフィックテレビジョンの研究に取り組んでいます。
+      </p>
+      <p class="profile-text lang en hidden">
+        Master's student in the Department of Computer Science, Graduate School of Science and Technology, Nihon University. Member of the Yoshikawa-Yamaguchi Laboratory, conducting research on computer holography and holographic television systems.
+      </p>
+      <p class="profile-text lang ja" style="margin-top:16px;">
+        特に、高額な専用光学機器を使用しない安価な再生光学系を対象とし、ホログラフィックテレビジョンの機能追加および性能向上を目指しています。
+      </p>
+      <p class="profile-text lang en hidden" style="margin-top:16px;">
+        My research focuses on enhancing low-cost holographic television systems that do not require expensive dedicated optical equipment, aiming to improve functionality and display performance.
+      </p>
     </div>
-</div>
+  </section>
 
-<div class="timeline-item">
-    <div class="timeline-date">2022.04</div>
-    <div class="timeline-content">
-        <span class="lang ja">
-            日本大学 理工学部 応用情報工学科 入学
-        </span>
-        <span class="lang en hidden">
-            Entered Nihon University,
-            College of Science and Technology,
-            Computer Engineerring
-        </span>
+  <!-- RESEARCH -->
+  <section id="research" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></span>
+      <span class="section-num">02</span>
     </div>
-</div>
-
-<div class="timeline-item">
-    <div class="timeline-date">2026.03</div>
-    <div class="timeline-content">
-        <span class="lang ja">
-            日本大学 理工学部 応用情報工学科 卒業
-        </span>
-        <span class="lang en hidden">
-            Graduated from Nihon University,
-            College of Science and Technology,
-            Computer Engineerring
-        </span>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">研究内容</span>
+        <span class="lang en hidden">Research</span>
+      </h2>
+      <div class="research-block">
+        <h3 class="research-title lang ja">
+          高額専用機器を使用しない安価な再生光学系の<br>ホログラフィックテレビジョンの機能追加・性能向上
+        </h3>
+        <h3 class="research-title lang en hidden">
+          Functionality Enhancement and Performance Improvement of Low-Cost Holographic Television Systems Without Expensive Dedicated Optical Devices
+        </h3>
+        <p class="research-desc lang ja">
+          市販LCDパネルを単板SLMとして利用した低コストHoloTVシステムの実用化を目指しています。
+        </p>
+        <p class="research-desc lang en hidden">
+          This research aims to improve the practicality of low-cost HoloTV systems using commercially available LCD panels as single-panel spatial light modulators.
+        </p>
+        <div class="tag-list">
+          <span class="tag"><span class="lang ja">ガンマ補正・色再現性向上</span><span class="lang en hidden">Gamma Correction</span></span>
+          <span class="tag"><span class="lang ja">14K LCD 高解像度化</span><span class="lang en hidden">14K High-Resolution</span></span>
+          <span class="tag"><span class="lang ja">再生画質評価</span><span class="lang en hidden">Image Quality Evaluation</span></span>
+          <span class="tag"><span class="lang ja">低コスト光学系の実用化</span><span class="lang en hidden">Low-Cost Optical Systems</span></span>
+        </div>
+      </div>
     </div>
-</div>
+  </section>
 
-<div class="timeline-item">
-    <div class="timeline-date">2026.04</div>
-    <div class="timeline-content">
-        <span class="lang ja">
-            日本大学大学院 理工学研究科 情報科学専攻 入学
-        </span>
-        <span class="lang en hidden">
-            Entered Graduate School of Science and Technology,
-            Computer Science,
-            Nihon University
-        </span>
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></span>
+      <span class="section-num">03</span>
     </div>
-</div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">研究・開発</span>
+        <span class="lang en hidden">Projects</span>
+      </h2>
+      <div class="projects-grid">
 
-</div>
+        <div class="project-card">
+          <span class="project-arrow">↗</span>
+          <p class="project-kind lang ja">研究</p>
+          <p class="project-kind lang en hidden">Research</p>
+          <h3 class="project-name lang ja">ガンマ補正による色再現性向上</h3>
+          <h3 class="project-name lang en hidden">Gamma Correction for Improved Color Reproduction</h3>
+          <p class="project-desc lang ja">LCD-SLMの非線形応答を補正し、ホログラム再生像の色再現性を改善。</p>
+          <p class="project-desc lang en hidden">Correcting the nonlinear response of LCD-SLMs to improve color accuracy in holographic reconstructions.</p>
+        </div>
 
-</div>
+        <div class="project-card">
+          <span class="project-arrow">↗</span>
+          <p class="project-kind lang ja">研究</p>
+          <p class="project-kind lang en hidden">Research</p>
+          <h3 class="project-name lang ja">14K LCDを用いた高解像度表示</h3>
+          <h3 class="project-name lang en hidden">14K High-Resolution Holographic Display</h3>
+          <p class="project-desc lang ja">14K解像度LCDパネルを用いた高品位ホログラム表示システムの構築。</p>
+          <p class="project-desc lang en hidden">Building a high-quality holographic display system using 14K-resolution LCD panels.</p>
+        </div>
 
-</section>
+        <div class="project-card">
+          <span class="project-arrow">↗</span>
+          <p class="project-kind lang ja">開発</p>
+          <p class="project-kind lang en hidden">Development</p>
+          <h3 class="project-name lang ja">CGH生成システム開発</h3>
+          <h3 class="project-name lang en hidden">CGH Generation System</h3>
+          <p class="project-desc lang ja">NeRFで取得した点群データからレインボーホログラムをリアルタイム生成するシステム。</p>
+          <p class="project-desc lang en hidden">Real-time generation of rainbow holograms from NeRF-acquired point cloud data.</p>
+        </div>
 
-<section id="contact">
+      </div>
+    </div>
+  </section>
 
-<h2 class="section-title">
-<span class="lang ja">連絡先</span>
-<span class="lang en hidden">Contact</span>
-</h2>
+  <!-- PUBLICATIONS -->
+  <section id="publications" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">業績</span><span class="lang en hidden">Works</span></span>
+      <span class="section-num">04</span>
+    </div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">論文・発表</span>
+        <span class="lang en hidden">Publications</span>
+      </h2>
 
-<div class="card">
+      <div class="pub-tabs">
+        <button class="pub-tab active" onclick="showPubTab('conference', this)">
+          <span class="lang ja">学会発表</span>
+          <span class="lang en hidden">Conference</span>
+        </button>
+        <button class="pub-tab" onclick="showPubTab('papers', this)">
+          <span class="lang ja">論文</span>
+          <span class="lang en hidden">Papers</span>
+        </button>
+        <button class="pub-tab" onclick="showPubTab('awards', this)">
+          <span class="lang ja">学内受賞</span>
+          <span class="lang en hidden">Awards</span>
+        </button>
+      </div>
 
-<p>
-<span class="lang ja">
-所属：日本大学大学院 理工学研究科 情報科学専攻<br>
-研究室：吉川・山口研究室
-</span>
+      <div id="conference" class="pub-panel active">
+        <div id="conference-list"></div>
+      </div>
+      <div id="papers" class="pub-panel">
+        <div id="paper-list"></div>
+      </div>
+      <div id="awards" class="pub-panel">
+        <div id="award-list"></div>
+      </div>
+    </div>
+  </section>
 
-<span class="lang en hidden">
-Department of Computer Science,<br>
-Graduate School of Science and Technology,<br>
-Nihon University<br>
-Yoshikawa-Yamaguchi Laboratory
-</span>
-</p>
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">技術</span><span class="lang en hidden">Skills</span></span>
+      <span class="section-num">05</span>
+    </div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">スキル</span>
+        <span class="lang en hidden">Skills</span>
+      </h2>
+      <div class="skills-grid">
+        <div>
+          <p class="skill-group-label lang ja">プログラミング</p>
+          <p class="skill-group-label lang en hidden">Programming</p>
+          <ul class="skill-list">
+            <li>C / C++</li>
+            <li>Python</li>
+            <li>HTML / CSS</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+        <div>
+          <p class="skill-group-label lang ja">開発環境・ツール</p>
+          <p class="skill-group-label lang en hidden">Tools &amp; Environment</p>
+          <ul class="skill-list">
+            <li>Git / GitHub</li>
+            <li>VS Code</li>
+            <li>Visual Studio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<p>
-📧
-<a href="mailto:csmk26006@g.nihon-u.ac.jp">
-csmk26006@g.nihon-u.ac.jp
-</a>
-</p>
-<p>
-💻
-<a
-href="https://github.com/Makoto-O-holo"
-target="_blank"
-rel="noopener noreferrer">
-GitHub
-</a>
-</p>
+  <!-- HOBBIES -->
+  <section id="hobbies" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></span>
+      <span class="section-num">06</span>
+    </div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">趣味・個人制作</span>
+        <span class="lang en hidden">Personal Projects</span>
+      </h2>
+      <div class="hobby-grid">
 
+        <div class="hobby-card">
+          <div class="hobby-icon">📷</div>
+          <h3 class="hobby-name lang ja">写真撮影</h3>
+          <h3 class="hobby-name lang en hidden">Photography</h3>
+          <p class="hobby-desc lang ja">
+            日常や風景を中心に撮影しています。光と影の表現を探求しながら、構図やカラーグレーディングを研究中。
+          </p>
+          <p class="hobby-desc lang en hidden">
+            Primarily capturing everyday scenes and landscapes, exploring expression through light, shadow, composition, and color grading.
+          </p>
+          <span class="wip-badge lang ja">作品追加予定</span>
+          <span class="wip-badge lang en hidden">Gallery coming soon</span>
+        </div>
 
-</div>
+        <div class="hobby-card">
+          <div class="hobby-icon">🕐</div>
+          <h3 class="hobby-name lang ja">デスクトップ時計アプリ</h3>
+          <h3 class="hobby-name lang en hidden">Desktop Clock App</h3>
+          <p class="hobby-desc lang ja">
+            趣味で制作したデスクトップ用の時計ソフトウェア。GitHubにリポジトリ公開済み。
+          </p>
+          <p class="hobby-desc lang en hidden">
+            A desktop clock application developed as a personal hobby project. Repository available on GitHub.
+          </p>
+          <a href="https://github.com/Makoto-O-holo" target="_blank" rel="noopener noreferrer" class="hobby-link">GitHub →</a>
+        </div>
 
-</section>
+      </div>
+      <p style="font-size:12px; color:var(--muted); font-family:var(--ff-mono); letter-spacing:0.04em;">
+        <span class="lang ja">※ 写真ギャラリーおよびアプリ詳細ページは順次追加予定です。</span>
+        <span class="lang en hidden">* Photography gallery and app details page are being added progressively.</span>
+      </p>
+    </div>
+  </section>
 
+  <!-- CAREER -->
+  <section id="career" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></span>
+      <span class="section-num">07</span>
+    </div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">経歴</span>
+        <span class="lang en hidden">Education</span>
+      </h2>
+      <div class="timeline">
 
-</div>
+        <div class="tl-item">
+          <div class="tl-date">2019.04</div>
+          <div class="tl-content">
+            <strong class="lang ja">宮城県仙台第一高等学校 入学</strong>
+            <strong class="lang en hidden">Entered Miyagi Pref. Sendai Daiichi High School</strong>
+          </div>
+        </div>
 
+        <div class="tl-item">
+          <div class="tl-date">2022.03</div>
+          <div class="tl-content">
+            <strong class="lang ja">宮城県仙台第一高等学校 卒業</strong>
+            <strong class="lang en hidden">Graduated from Miyagi Pref. Sendai Daiichi High School</strong>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2022.04</div>
+          <div class="tl-content">
+            <strong class="lang ja">日本大学 理工学部 応用情報工学科 入学</strong>
+            <strong class="lang en hidden">Entered Nihon University — Computer Engineering</strong>
+          </div>
+        </div>
+
+        <div class="tl-item highlight">
+          <div class="tl-date">2026.03</div>
+          <div class="tl-content">
+            <strong class="lang ja">日本大学 理工学部 応用情報工学科 卒業</strong>
+            <strong class="lang en hidden">Graduated from Nihon University — Computer Engineering</strong>
+            <span class="lang ja" style="font-size:12px; color:var(--accent);">優等賞・応用情報工学科賞 受賞</span>
+            <span class="lang en hidden" style="font-size:12px; color:var(--accent);">Excellence Award &amp; Dept. Award</span>
+          </div>
+        </div>
+
+        <div class="tl-item highlight">
+          <div class="tl-date">2026.04</div>
+          <div class="tl-content">
+            <strong class="lang ja">日本大学大学院 理工学研究科 情報科学専攻 入学</strong>
+            <strong class="lang en hidden">Entered Nihon Univ. Grad. School — Computer Science</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="section-label">
+      <span class="section-tag"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></span>
+      <span class="section-num">08</span>
+    </div>
+    <div class="section-body">
+      <h2 class="section-title">
+        <span class="lang ja">連絡先</span>
+        <span class="lang en hidden">Contact</span>
+      </h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="contact-label lang ja">所属</span>
+          <span class="contact-label lang en hidden">Affiliation</span>
+          <span class="contact-value lang ja">日本大学大学院 理工学研究科<br>情報科学専攻</span>
+          <span class="contact-value lang en hidden">Dept. of Computer Science,<br>Grad. School of Sci. &amp; Tech., Nihon Univ.</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label lang ja">研究室</span>
+          <span class="contact-label lang en hidden">Laboratory</span>
+          <span class="contact-value lang ja">吉川・山口研究室</span>
+          <span class="contact-value lang en hidden">Yoshikawa-Yamaguchi Lab.</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">
+            <a href="mailto:csmk26006@g.nihon-u.ac.jp">csmk26006@g.nihon-u.ac.jp</a>
+          </span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">
+            <a href="https://github.com/Makoto-O-holo" target="_blank" rel="noopener noreferrer">Makoto-O-holo</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
 <footer>
-
-<span class="lang ja">
-© 2026 Makoto Oikawa | 研究ポートフォリオ
-</span>
-
-<span class="lang en hidden">
-© 2026 Makoto Oikawa | Research Portfolio
-</span>
-
+  <span class="footer-copy">© 2026 Makoto Oikawa</span>
+  <a href="#" class="footer-back">
+    <span class="lang ja">↑ トップへ</span>
+    <span class="lang en hidden">↑ Top</span>
+  </a>
 </footer>
 
+<!-- ─── SCRIPTS ─── -->
 <script>
-
-let currentLang = "ja";
-
+/* ── DATA ── */
 const conferences = [
-
-    {
-        authors:
-        "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
-        title:
-        "Real-time calculation and display of 14K rainbow hologram on transmission liquid crystal panel",
-        conference:
-        "SPIE Practical Holography XXXX",
-        citation:
-        "Vol.13917, 1391707",
-        date:
-        "Jan. 20, 2026"
-    },
-
-    {
-        authors:
-        "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
-        title:
-        "Computer-Generated Rainbow Hologram from Point Cloud Obtained by NeRF",
-        conference:
-        "Digital Holography and Three-Dimensional Imaging (DH) 2025",
-        citation:
-        "DTh3A.2",
-        date:
-        "Aug. 21, 2025"
-    }
-
+  {
+    authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
+    title:   "Real-time calculation and display of 14K rainbow hologram on transmission liquid crystal panel",
+    venue:   "SPIE Practical Holography XXXX",
+    cite:    "Vol.13917, 1391707",
+    date:    "Jan. 2026"
+  },
+  {
+    authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
+    title:   "Computer-Generated Rainbow Hologram from Point Cloud Obtained by NeRF",
+    venue:   "Digital Holography and Three-Dimensional Imaging (DH) 2025",
+    cite:    "DTh3A.2",
+    date:    "Aug. 2025"
+  }
 ];
-const papers = [
 
-    
-
-];
+const papers = [];
 
 const awards = [
-
-    {
-        date:"2026.03",
-        title:"優等賞"
-    },
-
-    {
-        date:"2026.03",
-        title:"応用情報工学科賞"
-    }
-
+  { date: "2026.03", title: "優等賞 / Excellence Award" },
+  { date: "2026.03", title: "応用情報工学科賞 / Dept. Award" }
 ];
 
-function toggleLanguage(){
+/* ── RENDER ── */
+function renderPublications() {
+  const cl = document.getElementById('conference-list');
+  const pl = document.getElementById('paper-list');
+  const al = document.getElementById('award-list');
 
-    const jaElements =
-        document.querySelectorAll(".ja");
+  if (conferences.length === 0) {
+    cl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
+  } else {
+    cl.innerHTML = conferences.map(c => `
+      <div class="pub-item">
+        <div class="pub-date">${c.date}</div>
+        <div class="pub-content">
+          <div class="pub-title">${c.title}</div>
+          <div class="pub-meta">${c.authors}<br><em>${c.venue}</em>, ${c.cite}</div>
+        </div>
+      </div>`).join('');
+  }
 
-    const enElements =
-        document.querySelectorAll(".en");
+  if (papers.length === 0) {
+    pl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
+  } else {
+    pl.innerHTML = papers.map(p => `
+      <div class="pub-item">
+        <div class="pub-date">${p.year}</div>
+        <div class="pub-content">
+          <div class="pub-title">${p.title}</div>
+          <div class="pub-meta">${p.authors}<br><em>${p.journal}</em></div>
+        </div>
+      </div>`).join('');
+  }
 
-    if(currentLang === "ja"){
-
-        jaElements.forEach(el=>{
-            el.classList.add("hidden");
-        });
-
-        enElements.forEach(el=>{
-            el.classList.remove("hidden");
-        });
-
-        document.documentElement.lang = "en";
-
-        document.getElementById("langBtn").textContent =
-            "日本語";
-
-        currentLang = "en";
-
-    }else{
-
-        enElements.forEach(el=>{
-            el.classList.add("hidden");
-        });
-
-        jaElements.forEach(el=>{
-            el.classList.remove("hidden");
-        });
-
-        document.documentElement.lang = "ja";
-
-        document.getElementById("langBtn").textContent =
-            "English";
-
-        currentLang = "ja";
-    }
+  al.innerHTML = awards.map(a => `
+    <div class="award-item">
+      <span class="award-date">${a.date}</span>
+      <span class="award-title">${a.title}</span>
+    </div>`).join('');
 }
 
-function toggleTheme(){
-
-    if(document.body.dataset.theme==="dark"){
-        document.body.removeAttribute("data-theme");
-    }else{
-        document.body.dataset.theme="dark";
-    }
-
+/* ── TABS ── */
+function showPubTab(id, btn) {
+  document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pub-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
 }
 
-function renderPublications(){
-
-    const paperList =
-    document.getElementById("paper-list");
-
-    const conferenceList =
-    document.getElementById("conference-list");
-
-    const awardList =
-    document.getElementById("award-list");
-
-    paperList.innerHTML="";
-    conferenceList.innerHTML="";
-    awardList.innerHTML="";
-
-    papers.forEach(p=>{
-
-    paperList.innerHTML += `
-    <li style="margin-bottom:18px;">
-    <strong>${p.title}</strong><br>
-    ${p.authors}<br>
-    <em>${p.journal}</em>, ${p.year}
-    </li>
-    `;
-
-    });
-
-    if(conferences.length===0){
-
-        conferenceList.innerHTML=`
-        <li>
-        <span class="lang ja">現在登録なし</span>
-        <span class="lang en hidden">No presentations yet.</span>
-        </li>
-        `;
-
-    }else{
-
-        conferences.forEach(c=>{
-
-        conferenceList.innerHTML += `
-        <li style="margin-bottom:20px;">
-
-        <strong>
-        ${c.title}
-        </strong>
-
-        <br>
-
-        ${c.authors}
-
-        <br>
-
-        <em>
-        ${c.conference}
-        </em>
-
-        <br>
-
-        ${c.citation}
-
-        <br>
-
-        ${c.date}
-
-        </li>
-        `;
-        });
-    }
-
-    if(awards.length===0){
-
-        awardList.innerHTML=`
-        <li>現在登録なし</li>
-        `;
-
-    }else{
-
-        awards.forEach(a=>{
-
-        awardList.innerHTML += `
-        <li style="margin-bottom:18px;">
-
-        ${a.date}
-        ${a.title}
-
-        </li>
-        `;
-
-    });
-
-    }
-
+/* ── LANGUAGE ── */
+let lang = 'ja';
+function toggleLanguage() {
+  lang = lang === 'ja' ? 'en' : 'ja';
+  const isEn = lang === 'en';
+  document.querySelectorAll('.lang.ja').forEach(el => el.classList.toggle('hidden', isEn));
+  document.querySelectorAll('.lang.en').forEach(el => el.classList.toggle('hidden', !isEn));
+  document.documentElement.lang = lang;
+  document.getElementById('langBtn').textContent = isEn ? 'JA' : 'EN';
 }
 
-function showPubTab(tabId,btn){
-
-    document
-    .querySelectorAll(".pub-content")
-    .forEach(tab=>{
-    tab.classList.remove("active");
-    });
-
-    document
-    .querySelectorAll(".tab-btn")
-    .forEach(tab=>{
-    tab.classList.remove("active");
-    });
-
-    document
-    .getElementById(tabId)
-    .classList.add("active");
-
-    btn.classList.add("active");
+/* ── THEME ── */
+function toggleTheme() {
+  const isDark = document.body.dataset.theme === 'dark';
+  document.body.dataset.theme = isDark ? '' : 'dark';
+  document.getElementById('themeBtn').textContent = isDark ? '◑' : '◕';
 }
 
-function initializePublicationTab(){
-
-    document
-    .querySelectorAll(".pub-content")
-    .forEach(tab=>{
-        tab.classList.remove("active");
-    });
-
-    document
-    .querySelectorAll(".tab-btn")
-    .forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    document
-    .getElementById("conference")
-    .classList.add("active");
-
-    document
-    .querySelector(".tab-btn")
-    .classList.add("active");
-}
-
+/* ── INIT ── */
 renderPublications();
-initializePublicationTab();
-
-
-
-
 </script>
 
 </body>
