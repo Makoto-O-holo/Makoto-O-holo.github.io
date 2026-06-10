@@ -472,6 +472,45 @@ nav {
   color: var(--ink2);
 }
 
+.pub-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+/* .pub-title はインライン要素として再定義 */
+.pub-title-row .pub-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.role-badge {
+  flex-shrink: 0;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.role-first {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.role-co {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
 .award-item {
   padding: 16px 0;
   border-bottom: 1px solid var(--rule);
@@ -570,6 +609,11 @@ nav {
 .tl-item.highlight::before {
   border-color: var(--accent);
   background: var(--accent);
+}
+
+.tl-item.highlight.award::before {
+  border-color: var(--accent2);
+  background: var(--accent2);
 }
 
 .tl-date {
@@ -745,7 +789,6 @@ footer {
 
 /* ─── UTILITY ─── */
 .hidden { display: none !important; }
-.lang { display: block; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
@@ -790,16 +833,13 @@ footer {
   <canvas id="holo-canvas"></canvas>
   <div class="header-inner">
     <div class="header-left">
-      <p class="header-eyebrow">
-        <span class="lang en hidden">Researcher &amp; Developer</span>
-      </p>
       <h1>
-        <span class="lang ja">及川 <em>真琴</em></span>
-        <span class="lang en hidden">Makoto <em>Oikawa</em></span>
+        <span class="lang ja" style="display:block;">及川 <em>真琴</em></span>
+        <span class="lang en hidden" style="display:block;">Makoto <em>Oikawa</em></span>
       </h1>
       <p class="header-sub">
-        <span class="lang ja">日本大学大学院 理工学研究科 情報科学専攻<br>コンピュータホログラフィ / ホログラフィックテレビジョン</span>
-        <span class="lang en hidden">Graduate School of Science and Technology, Nihon University<br>Computer Holography &amp; Holographic Television</span>
+        <span class="lang ja" style="display:block;">日本大学大学院 理工学研究科 情報科学専攻<br>コンピュータホログラフィ / ホログラフィックテレビジョン</span>
+        <span class="lang en hidden" style="display:block;">Graduate School of Science and Technology, Nihon University<br>Computer Holography &amp; Holographic Television</span>
       </p>
     </div>
   </div>
@@ -1096,13 +1136,13 @@ footer {
           </div>
         </div>
 
-        <div class="tl-item highlight">
+        <div class="tl-item highlight award">
           <div class="tl-date">2026.03</div>
           <div class="tl-content">
             <strong class="lang ja">日本大学 理工学部 応用情報工学科 卒業</strong>
             <strong class="lang en hidden">Graduated from Nihon University — Computer Engineering</strong>
-            <span class="lang ja" style="font-size:12px; color:var(--accent);">優等賞・応用情報工学科賞 受賞</span>
-            <span class="lang en hidden" style="font-size:12px; color:var(--accent);">Excellence Award &amp; Dept. Award</span>
+            <span class="lang ja" style="display:block; font-size:12px; color:var(--accent2);">優等賞・応用情報工学科賞 受賞</span>
+            <span class="lang en hidden" style="display:block; font-size:12px; color:var(--accent2);">Excellence Award &amp; Dept. Award</span>
           </div>
         </div>
 
@@ -1172,6 +1212,11 @@ footer {
 <!-- ─── SCRIPTS ─── -->
 <script>
 /* ── DATA ── */
+// ※ authors の先頭が自分の名前なら自動で「筆頭著者」バッジになります
+//   例: "Makoto Oikawa, ..." → 筆頭著者
+//       "Hiroshi Yoshikawa, Makoto Oikawa, ..." → 共著者
+const MY_NAME = "Makoto Oikawa";
+
 const conferences = [
   {
     authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
@@ -1192,11 +1237,26 @@ const conferences = [
 const papers = [];
 
 const awards = [
-  { date: "2026.03", title: "優等賞 / Excellence Award" },
-  { date: "2026.03", title: "応用情報工学科賞 / Dept. Award" }
+  { date: "2026.03", titleJa: "優等賞",        titleEn: "Excellence Award" },
+  { date: "2026.03", titleJa: "応用情報工学科賞", titleEn: "Dept. Award" }
 ];
 
 /* ── RENDER ── */
+
+// 著者文字列から役割を判定し、自分の名前を太字にして返す
+function formatAuthors(authors) {
+  // 自分の名前を <strong> でハイライト
+  return authors.replace(MY_NAME, `<strong style="color:var(--ink)">${MY_NAME}</strong>`);
+}
+
+function authorRole(authors) {
+  // 先頭が自分の名前なら筆頭著者
+  const trimmed = authors.trimStart();
+  return trimmed.startsWith(MY_NAME)
+    ? { label: '筆頭著者', labelEn: 'First Author', cls: 'role-first' }
+    : { label: '共著',     labelEn: 'Co-Author',    cls: 'role-co'    };
+}
+
 function renderPublications() {
   const cl = document.getElementById('conference-list');
   const pl = document.getElementById('paper-list');
@@ -1205,33 +1265,54 @@ function renderPublications() {
   if (conferences.length === 0) {
     cl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
   } else {
-    cl.innerHTML = conferences.map(c => `
+    cl.innerHTML = conferences.map(c => {
+      const role = authorRole(c.authors);
+      return `
       <div class="pub-item">
         <div class="pub-date">${c.date}</div>
         <div class="pub-content">
-          <div class="pub-title">${c.title}</div>
-          <div class="pub-meta">${c.authors}<br><em>${c.venue}</em>, ${c.cite}</div>
+          <div class="pub-title-row">
+            <span class="pub-title">${c.title}</span>
+            <span class="role-badge ${role.cls}">
+              <span class="lang ja">${role.label}</span>
+              <span class="lang en hidden">${role.labelEn}</span>
+            </span>
+          </div>
+          <div class="pub-meta">${formatAuthors(c.authors)}<br><em>${c.venue}</em>, ${c.cite}</div>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
 
   if (papers.length === 0) {
     pl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
   } else {
-    pl.innerHTML = papers.map(p => `
+    pl.innerHTML = papers.map(p => {
+      const role = authorRole(p.authors);
+      return `
       <div class="pub-item">
         <div class="pub-date">${p.year}</div>
         <div class="pub-content">
-          <div class="pub-title">${p.title}</div>
-          <div class="pub-meta">${p.authors}<br><em>${p.journal}</em></div>
+          <div class="pub-title-row">
+            <span class="pub-title">${p.title}</span>
+            <span class="role-badge ${role.cls}">
+              <span class="lang ja">${role.label}</span>
+              <span class="lang en hidden">${role.labelEn}</span>
+            </span>
+          </div>
+          <div class="pub-meta">${formatAuthors(p.authors)}<br><em>${p.journal}</em></div>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
 
   al.innerHTML = awards.map(a => `
     <div class="award-item">
       <span class="award-date">${a.date}</span>
-      <span class="award-title">${a.title}</span>
+      <span class="award-title">
+        <span class="lang ja" style="display:block;">${a.titleJa}</span>
+        <span class="lang en hidden" style="display:block;">${a.titleEn}</span>
+      </span>
     </div>`).join('');
 }
 
