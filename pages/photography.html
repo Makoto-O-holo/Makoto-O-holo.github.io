@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography | Makoto Oikawa</title>
+<meta name="description" content="写真ギャラリー">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<!-- tokens.css is one level up -->
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/photography.css">
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<div class="photo-hero">
+  <div class="photo-hero-inner">
+    <span class="photo-hero-eyebrow">Photography</span>
+    <h1>
+      <span class="lang ja">光と、<em>視点</em>と。</span>
+      <span class="lang en hidden">Light &amp; <em>Perspective</em></span>
+    </h1>
+    <p class="photo-hero-sub">
+      <span class="lang ja">日常や風景の中に潜む光の表情。</span>
+      <span class="lang en hidden">The character of light hidden in everyday scenes and landscapes.</span>
+    </p>
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-name">M. Oikawa</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#profile"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a></li>
+      <li><a href="../index.html#research"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a></li>
+      <li><a href="../index.html#projects"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></a></li>
+      <li><a href="../index.html#publications"><span class="lang ja">発表</span><span class="lang en hidden">Publications</span></a></li>
+      <li><a href="../index.html#skills"><span class="lang ja">スキル</span><span class="lang en hidden">Skills</span></a></li>
+      <li><a href="../index.html#hobbies"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></a></li>
+      <li><a href="../index.html#career"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></a></li>
+      <li><a href="../index.html#contact"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="ctrl-btn" id="langBtn" onclick="toggleLanguage()">EN</button>
+      <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">◑</button>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── MOBILE DRAWER ─── -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="../index.html#profile"      onclick="closeDrawer()"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a>
+  <a href="../index.html#research"     onclick="closeDrawer()"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a>
+  <a href="../index.html#projects"     onclick="closeDrawer()"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></a>
+  <a href="../index.html#publications" onclick="closeDrawer()"><span class="lang ja">発表</span><span class="lang en hidden">Publications</span></a>
+  <a href="../index.html#skills"       onclick="closeDrawer()"><span class="lang ja">スキル</span><span class="lang en hidden">Skills</span></a>
+  <a href="../index.html#hobbies"      onclick="closeDrawer()"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></a>
+  <a href="../index.html#career"       onclick="closeDrawer()"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></a>
+  <div class="nav-drawer-divider"></div>
+  <a href="../index.html#contact"      onclick="closeDrawer()"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></a>
+</div>
+
+<!-- ─── FILTER BAR ─── -->
+<div class="gallery-filter">
+  <div class="filter-inner" id="filterInner">
+    <!-- rendered by gallery.js -->
+  </div>
+</div>
+
+<!-- ─── GALLERY BODY ─── -->
+<div class="gallery-body">
+
+  <!-- Photo grid (rendered by gallery.js) -->
+  <div class="photo-grid" id="photoGrid"></div>
+
+  <!-- Placeholder: shown when PHOTOS array is empty -->
+  <div class="gallery-placeholder" id="galleryPlaceholder" style="display:none;">
+    <div class="placeholder-icon">📷</div>
+    <p class="placeholder-label lang ja">作品準備中</p>
+    <p class="placeholder-label lang en hidden">Gallery Coming Soon</p>
+    <p class="placeholder-hint lang ja">写真作品を順次追加予定です。</p>
+    <p class="placeholder-hint lang en hidden">Photos will be added soon.</p>
+  </div>
+
+  <!-- Per-filter empty state -->
+  <div class="filter-empty" id="filterEmpty">
+    <p class="lang ja">このカテゴリには作品がまだありません。</p>
+    <p class="lang en hidden">No photos in this category yet.</p>
+  </div>
+</pre>
+  </div>
+
+</div>
+
+<!-- ─── LIGHTBOX ─── -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" onclick="closeLightbox()">
+    <span class="lang ja">閉じる</span>
+    <span class="lang en hidden">Close</span>
+  </button>
+  <button class="lb-nav lb-prev" onclick="lightboxNav(-1)" aria-label="Previous">←</button>
+  <button class="lb-nav lb-next" onclick="lightboxNav(1)"  aria-label="Next">→</button>
+  <div class="lb-inner">
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <div class="lb-meta">
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-details" id="lbDetails"></div>
+    </div>
+  </div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 Makoto Oikawa</span>
+  <a href="../index.html" class="footer-back">
+    <span class="lang ja">← ポートフォリオへ</span>
+    <span class="lang en hidden">← Portfolio</span>
+  </a>
+</footer>
+
+<!-- ─── SCRIPTS ─── -->
+<!-- paths are relative to pages/ so go up one level -->
+<script src="../js/shared.js"></script>
+<script src="../js/gallery.js"></script>
+
+<!-- Wire up language toggle to gallery sync -->
+<script>
+  (function() {
+    const _orig = window.toggleLanguage;
+    window.toggleLanguage = function() {
+      _orig();
+      // sync gallery labels/overlays to new lang
+      if (typeof syncGalleryLang === 'function') {
+        syncGalleryLang(lang);
+      }
+    };
+  })();
+</script>
+
+</body>
+</html>

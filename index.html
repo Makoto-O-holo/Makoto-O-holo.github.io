@@ -4,905 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Makoto Oikawa | Portfolio</title>
+<meta name="description" content="及川真琴のポートフォリオ — コンピュータホログラフィ・ホログラフィックテレビジョン研究">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
-<style>
-/* ─── TOKENS ─── */
-:root {
-  --ink:     #1a1a1e;
-  --ink2:    #3d3d45;
-  --muted:   #8a8a96;
-  --bg:      #f7f6f3;
-  --surface: #ffffff;
-  --border:  rgba(26,26,30,0.10);
-  --accent:  #00b4aa;
-  --accent2: #7c6cf5;
-  --rule:    rgba(26,26,30,0.12);
-  --ff-display: 'Cormorant Garant', Georgia, serif;
-  --ff-body:    'Noto Sans JP', sans-serif;
-  --ff-mono:    'Space Mono', monospace;
-}
-
-[data-theme="dark"] {
-  --ink:     #f0efe9;
-  --ink2:    #c8c8d0;
-  --muted:   #6e6e7a;
-  --bg:      #111114;
-  --surface: #1c1c21;
-  --border:  rgba(240,239,233,0.08);
-  --accent:  #2dd4cc;
-  --accent2: #9d8ff8;
-  --rule:    rgba(240,239,233,0.10);
-}
-
-/* ─── RESET ─── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--ff-body);
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.8;
-  font-size: 15px;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ─── HERO HEADER ─── */
-header {
-  position: relative;
-  overflow: hidden;
-  background: #0d0d10;
-  padding: 96px 0 80px;
-}
-
-#holo-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.9;
-}
-
-.header-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 48px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 40px;
-}
-
-.header-left {}
-
-.header-eyebrow {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fade-up 0.6s 0.1s ease forwards;
-}
-
-header h1 {
-  font-family: var(--ff-display);
-  font-size: clamp(3.2rem, 6vw, 5.2rem);
-  font-weight: 500;
-  color: #f0efe9;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fade-up 0.7s 0.25s ease forwards;
-}
-
-header h1 em {
-  display: inline;
-  font-style: normal;
-  color: var(--accent);
-}
-
-.header-sub {
-  font-size: 13px;
-  color: rgba(240,239,233,0.45);
-  letter-spacing: 0.02em;
-  max-width: 480px;
-  line-height: 1.8;
-  opacity: 0;
-  animation: fade-up 0.7s 0.4s ease forwards;
-}
-
-.header-right {
-  text-align: right;
-  opacity: 0;
-  animation: fade-up 0.7s 0.5s ease forwards;
-}
-
-.header-stat {
-  margin-bottom: 20px;
-}
-
-.header-stat-num {
-  font-family: var(--ff-display);
-  font-size: 2.8rem;
-  font-weight: 400;
-  color: #f0efe9;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.header-stat-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(240,239,233,0.35);
-  margin-top: 4px;
-}
-
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  header h1, .header-eyebrow, .header-sub, .header-right {
-    animation: none; opacity: 1;
-  }
-}
-
-/* ─── NAV ─── */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 900;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-}
-
-.nav-name {
-  font-family: var(--ff-display);
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-  text-decoration: none;
-  letter-spacing: 0.01em;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--ink); }
-
-.nav-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.ctrl-btn {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--ink2);
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-  letter-spacing: 0.04em;
-}
-
-.ctrl-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ─── LAYOUT ─── */
-.site-body {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 48px 120px;
-}
-
-/* ─── SECTION STRUCTURE ─── */
-.section {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 0 64px;
-  padding: 80px 0;
-  border-top: 1px solid var(--rule);
-}
-
-.section-label {
-  padding-top: 4px;
-}
-
-.section-tag {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 6px;
-}
-
-.section-num {
-  font-family: var(--ff-display);
-  font-size: 2.4rem;
-  font-weight: 400;
-  color: var(--rule);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.section-body {
-  min-width: 0;
-}
-
-.section-title {
-  font-family: var(--ff-display);
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 32px;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-/* ─── PROFILE ─── */
-.profile-text {
-  font-size: 16px;
-  color: var(--ink2);
-  max-width: 640px;
-  line-height: 1.9;
-}
-
-.profile-text + .profile-text {
-  margin-top: 16px;
-}
-
-/* ─── RESEARCH ─── */
-.research-block {
-  border-left: 2px solid var(--accent);
-  padding-left: 24px;
-}
-
-.research-title {
-  font-family: var(--ff-display);
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-bottom: 16px;
-  line-height: 1.4;
-  color: var(--ink);
-}
-
-.research-desc {
-  color: var(--ink2);
-  margin-bottom: 20px;
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.tag {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  padding: 4px 12px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-}
-
-/* ─── PROJECTS GRID ─── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1px;
-  border: 1px solid var(--border);
-}
-
-.project-card {
-  background: var(--surface);
-  padding: 28px 28px 24px;
-  border: none;
-  position: relative;
-  cursor: default;
-  transition: background 0.2s;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-}
-
-.project-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--border);
-  pointer-events: none;
-}
-
-.project-card:hover {
-  background: var(--bg);
-}
-
-.project-card:hover .project-arrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-}
-
-.project-kind {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.project-name {
-  font-family: var(--ff-display);
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.35;
-  margin-bottom: 10px;
-}
-
-.project-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.65;
-  flex: 1;
-}
-
-.project-arrow {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 16px;
-  color: var(--accent);
-  opacity: 0;
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-/* ─── PUBLICATIONS ─── */
-.pub-tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 32px;
-}
-
-.pub-tab {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 10px 20px 10px 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: var(--muted);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  transition: color 0.2s, border-color 0.2s;
-}
-
-.pub-tab.active {
-  color: var(--ink);
-  border-bottom-color: var(--accent);
-}
-
-.pub-panel { display: none; }
-.pub-panel.active { display: block; }
-
-.pub-item {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 0 24px;
-}
-
-.pub-item:last-child { border-bottom: none; }
-
-.pub-date {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--muted);
-  padding-top: 3px;
-  letter-spacing: 0.04em;
-}
-
-.pub-content {}
-
-.pub-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1.5;
-}
-
-.pub-meta {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.pub-meta em {
-  font-style: italic;
-  color: var(--ink2);
-}
-
-.pub-title-row {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 4px;
-}
-
-/* .pub-title はインライン要素として再定義 */
-.pub-title-row .pub-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.5;
-  margin-bottom: 0;
-}
-
-.role-badge {
-  flex-shrink: 0;
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  padding: 2px 8px;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-
-.role-first {
-  background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-}
-
-.role-co {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-}
-
-.award-item {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-}
-
-.award-date {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--muted);
-  white-space: nowrap;
-  letter-spacing: 0.04em;
-}
-
-.award-title {
-  font-size: 14px;
-  color: var(--ink);
-}
-
-/* ─── SKILLS ─── */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 32px;
-}
-
-.skill-group-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.skill-list {
-  list-style: none;
-}
-
-.skill-list li {
-  font-size: 14px;
-  color: var(--ink2);
-  padding: 6px 0;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.skill-list li::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-/* ─── TIMELINE ─── */
-.timeline {
-  position: relative;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 139px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--rule);
-}
-
-.tl-item {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 0 36px;
-  padding: 16px 0;
-  position: relative;
-}
-
-.tl-item::before {
-  content: '';
-  position: absolute;
-  left: 134px;
-  top: 22px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 2px solid var(--rule);
-}
-
-.tl-item.highlight::before {
-  border-color: var(--accent);
-  background: var(--accent);
-}
-
-.tl-item.highlight.award::before {
-  border-color: var(--accent2);
-  background: var(--accent2);
-}
-
-.tl-date {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--muted);
-  padding-top: 3px;
-  text-align: left;
-  letter-spacing: 0.04em;
-}
-
-.tl-content {
-  font-size: 14px;
-  color: var(--ink2);
-  line-height: 1.6;
-}
-
-.tl-content strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-
-/* ─── HOBBIES ─── */
-.hobby-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  border: 1px solid var(--border);
-  margin-bottom: 32px;
-}
-
-.hobby-card {
-  background: var(--surface);
-  padding: 28px;
-  position: relative;
-}
-
-.hobby-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--border);
-  pointer-events: none;
-}
-
-.hobby-icon {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  font-size: 18px;
-}
-
-.hobby-name {
-  font-family: var(--ff-display);
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-
-.hobby-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-
-.hobby-link {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 1px;
-}
-
-.hobby-link:hover {
-  color: var(--accent2);
-  border-color: var(--accent2);
-}
-
-.wip-badge {
-  display: inline-block;
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  background: transparent;
-  border: 1px solid var(--accent2);
-  color: var(--accent2);
-  border-radius: 2px;
-  margin-bottom: 8px;
-}
-
-/* ─── CONTACT ─── */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.contact-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.contact-value {
-  font-size: 14px;
-  color: var(--ink);
-}
-
-.contact-value a {
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.contact-value a:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-/* ─── FOOTER ─── */
-footer {
-  border-top: 1px solid var(--rule);
-  padding: 40px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-left: 48px;
-  padding-right: 48px;
-}
-
-.footer-copy {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-.footer-back {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--muted);
-  text-decoration: none;
-  letter-spacing: 0.06em;
-  transition: color 0.2s;
-}
-
-.footer-back:hover { color: var(--ink); }
-
-/* ─── MOBILE NAV DRAWER ─── */
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.nav-hamburger span {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: var(--ink);
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-.nav-drawer {
-    display: none;
-    position: fixed;
-    top: 56px;
-    right: 0;
-    left: auto;
-    width: 220px;
-    max-width: 80vw;
-    background: var(--surface);
-    border-left: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    z-index: 899;
-    padding: 8px 0 16px;
-}
-
-.nav-drawer.open { display: block; }
-
-.nav-drawer a {
-  display: block;
-  padding: 12px 24px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s, background 0.2s;
-}
-
-.nav-drawer a:hover,
-.nav-drawer a:active {
-  color: var(--ink);
-  background: var(--bg);
-}
-
-.nav-drawer-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 8px 24px;
-}
-
-@media (max-width: 900px) {
-  .nav-hamburger { display: flex; }
-}
-
-/* ─── UTILITY ─── */
-.hidden { display: none !important; }
-@media (max-width: 900px) {
-  .site-body { padding: 0 24px 80px; }
-  .header-inner { padding: 0 24px; grid-template-columns: 1fr; }
-  .header-right { display: flex; gap: 32px; text-align: left; }
-  .nav-inner { padding: 0 24px; }
-  .nav-links { display: none; }
-  .section {
-    grid-template-columns: 1fr;
-    gap: 20px 0;
-    padding: 56px 0;
-  }
-  .section-num { display: none; }
-  footer { padding-left: 24px; padding-right: 24px; }
-}
-
-@media (max-width: 640px) {
-  header h1 { font-size: 2.8rem; }
-  .pub-item { grid-template-columns: 1fr; gap: 4px; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .timeline::before { left: 119px; }
-  .tl-item { grid-template-columns: 120px 1fr; }
-  .tl-item::before { left: 114px; }
-}
-
-/* ─── DARK MODE OVERRIDES ─── */
-[data-theme="dark"] nav {
-  background: rgba(28,28,33,0.92);
-}
-
-[data-theme="dark"] .project-card:hover,
-[data-theme="dark"] .hobby-card:hover {
-  background: rgba(255,255,255,0.02);
-}
-</style>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-<!-- ─── HEADER ─── -->
-<header>
+<!-- ─── HERO HEADER ─── -->
+<header class="site-header">
   <canvas id="holo-canvas"></canvas>
   <div class="header-inner">
     <div class="header-left">
+      <span class="header-eyebrow">Portfolio</span>
       <h1>
         <span class="lang ja" style="display:block;">及川 <em>真琴</em></span>
         <span class="lang en hidden" style="display:block;">Makoto <em>Oikawa</em></span>
@@ -916,9 +32,9 @@ footer {
 </header>
 
 <!-- ─── NAV ─── -->
-<nav>
+<nav class="site-nav">
   <div class="nav-inner">
-    <a href="#" class="nav-name">M. Oikawa</a>
+    <a href="index.html" class="nav-name">M. Oikawa</a>
     <ul class="nav-links">
       <li><a href="#profile"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a></li>
       <li><a href="#research"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a></li>
@@ -941,21 +57,21 @@ footer {
 
 <!-- ─── MOBILE DRAWER ─── -->
 <div class="nav-drawer" id="navDrawer">
-  <a href="#profile"      onclick="closeDrawer()"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a>
-  <a href="#research"     onclick="closeDrawer()"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a>
-  <a href="#projects"     onclick="closeDrawer()"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></a>
-  <a href="#publications" onclick="closeDrawer()"><span class="lang ja">発表</span><span class="lang en hidden">Publications</span></a>
-  <a href="#skills"       onclick="closeDrawer()"><span class="lang ja">スキル</span><span class="lang en hidden">Skills</span></a>
-  <a href="#hobbies"      onclick="closeDrawer()"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></a>
-  <a href="#career"       onclick="closeDrawer()"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></a>
+  <a href="#profile"            onclick="closeDrawer()"><span class="lang ja">プロフィール</span><span class="lang en hidden">Profile</span></a>
+  <a href="#research"           onclick="closeDrawer()"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></a>
+  <a href="#projects"           onclick="closeDrawer()"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></a>
+  <a href="#publications"       onclick="closeDrawer()"><span class="lang ja">発表</span><span class="lang en hidden">Publications</span></a>
+  <a href="#skills"             onclick="closeDrawer()"><span class="lang ja">スキル</span><span class="lang en hidden">Skills</span></a>
+  <a href="#hobbies"            onclick="closeDrawer()"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></a>
+  <a href="#career"             onclick="closeDrawer()"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></a>
   <div class="nav-drawer-divider"></div>
-  <a href="#contact"      onclick="closeDrawer()"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></a>
+  <a href="#contact"            onclick="closeDrawer()"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></a>
 </div>
 
-<!-- ─── BODY ─── -->
+<!-- ─── MAIN CONTENT ─── -->
 <main class="site-body">
 
-  <!-- PROFILE -->
+  <!-- 01 PROFILE -->
   <section id="profile" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">紹介</span><span class="lang en hidden">About</span></span>
@@ -982,7 +98,7 @@ footer {
     </div>
   </section>
 
-  <!-- RESEARCH -->
+  <!-- 02 RESEARCH -->
   <section id="research" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">研究</span><span class="lang en hidden">Research</span></span>
@@ -1016,7 +132,7 @@ footer {
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- 03 PROJECTS -->
   <section id="projects" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">開発</span><span class="lang en hidden">Projects</span></span>
@@ -1063,7 +179,7 @@ footer {
     </div>
   </section>
 
-  <!-- PUBLICATIONS -->
+  <!-- 04 PUBLICATIONS -->
   <section id="publications" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">業績</span><span class="lang en hidden">Works</span></span>
@@ -1102,7 +218,7 @@ footer {
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- 05 SKILLS -->
   <section id="skills" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">技術</span><span class="lang en hidden">Skills</span></span>
@@ -1137,7 +253,7 @@ footer {
     </div>
   </section>
 
-  <!-- HOBBIES -->
+  <!-- 06 HOBBIES -->
   <section id="hobbies" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">趣味</span><span class="lang en hidden">Hobbies</span></span>
@@ -1160,8 +276,8 @@ footer {
           <p class="hobby-desc lang en hidden">
             Primarily capturing everyday scenes and landscapes, exploring expression through light, shadow, composition, and color grading.
           </p>
-          <span class="wip-badge lang ja">作品追加予定</span>
-          <span class="wip-badge lang en hidden">Gallery coming soon</span>
+          <a href="pages/photography.html" class="hobby-link lang ja">ギャラリーを見る →</a>
+          <a href="pages/photography.html" class="hobby-link lang en hidden">View Gallery →</a>
         </div>
 
         <div class="hobby-card">
@@ -1179,13 +295,13 @@ footer {
 
       </div>
       <p style="font-size:12px; color:var(--muted); font-family:var(--ff-mono); letter-spacing:0.04em;">
-        <span class="lang ja">※ 写真ギャラリーおよびアプリ詳細ページは順次追加予定です。</span>
-        <span class="lang en hidden">* Photography gallery and app details page are being added progressively.</span>
+        <span class="lang ja">※ 写真ギャラリーは順次作品を追加予定です。</span>
+        <span class="lang en hidden">* Photography gallery is being updated progressively.</span>
       </p>
     </div>
   </section>
 
-  <!-- CAREER -->
+  <!-- 07 CAREER -->
   <section id="career" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">経歴</span><span class="lang en hidden">Career</span></span>
@@ -1227,8 +343,8 @@ footer {
           <div class="tl-content">
             <strong class="lang ja">日本大学 理工学部 応用情報工学科 卒業</strong>
             <strong class="lang en hidden">Graduated from Nihon University — Computer Engineering</strong>
-            <span class="lang ja" style="display:block; font-size:12px; color:var(--accent2);">優等賞・応用情報工学科賞 受賞</span>
-            <span class="lang en hidden" style="display:block; font-size:12px; color:var(--accent2);">Excellence Award &amp; Dept. Award</span>
+            <span class="lang ja"  style="display:block;font-size:12px;color:var(--accent2);">優等賞・応用情報工学科賞 受賞</span>
+            <span class="lang en hidden" style="display:block;font-size:12px;color:var(--accent2);">Excellence Award &amp; Dept. Award</span>
           </div>
         </div>
 
@@ -1244,7 +360,7 @@ footer {
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- 08 CONTACT -->
   <section id="contact" class="section">
     <div class="section-label">
       <span class="section-tag"><span class="lang ja">連絡先</span><span class="lang en hidden">Contact</span></span>
@@ -1287,7 +403,7 @@ footer {
 </main>
 
 <!-- ─── FOOTER ─── -->
-<footer>
+<footer class="site-footer">
   <span class="footer-copy">© 2026 Makoto Oikawa</span>
   <a href="#" class="footer-back">
     <span class="lang ja">↑ トップへ</span>
@@ -1296,257 +412,9 @@ footer {
 </footer>
 
 <!-- ─── SCRIPTS ─── -->
-<script>
-/* ── DATA ── */
-// ※ authors の先頭が自分の名前なら自動で「筆頭著者」バッジになります
-//   例: "Makoto Oikawa, ..." → 筆頭著者
-//       "Hiroshi Yoshikawa, Makoto Oikawa, ..." → 共著者
-const MY_NAME = "Makoto Oikawa";
-
-const conferences = [
-  {
-    authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
-    title:   "Real-time calculation and display of 14K rainbow hologram on transmission liquid crystal panel",
-    venue:   "SPIE Practical Holography XXXX",
-    cite:    "Vol.13917, 1391707",
-    date:    "Jan. 2026"
-  },
-  {
-    authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
-    title:   "Computer-Generated Rainbow Hologram from Point Cloud Obtained by NeRF",
-    venue:   "Digital Holography and Three-Dimensional Imaging (DH) 2025",
-    cite:    "DTh3A.2",
-    date:    "Aug. 2025"
-  }
-];
-
-const papers = [];
-
-const awards = [
-  { date: "2026.03", titleJa: "優等賞",        titleEn: "Excellence Award" },
-  { date: "2026.03", titleJa: "応用情報工学科賞", titleEn: "Dept. Award" }
-];
-
-/* ── RENDER ── */
-
-// 著者文字列から役割を判定し、自分の名前を太字にして返す
-function formatAuthors(authors) {
-  // 自分の名前を <strong> でハイライト
-  return authors.replace(MY_NAME, `<strong style="color:var(--ink)">${MY_NAME}</strong>`);
-}
-
-function authorRole(authors) {
-  // 先頭が自分の名前なら筆頭著者
-  const trimmed = authors.trimStart();
-  return trimmed.startsWith(MY_NAME)
-    ? { label: '筆頭著者', labelEn: 'First Author', cls: 'role-first' }
-    : { label: '共著',     labelEn: 'Co-Author',    cls: 'role-co'    };
-}
-
-function renderPublications() {
-  const cl = document.getElementById('conference-list');
-  const pl = document.getElementById('paper-list');
-  const al = document.getElementById('award-list');
-
-  if (conferences.length === 0) {
-    cl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
-  } else {
-    cl.innerHTML = conferences.map(c => {
-      const role = authorRole(c.authors);
-      return `
-      <div class="pub-item">
-        <div class="pub-date">${c.date}</div>
-        <div class="pub-content">
-          <div class="pub-title-row">
-            <span class="pub-title">${c.title}</span>
-            <span class="role-badge ${role.cls}">
-              <span class="lang ja">${role.label}</span>
-              <span class="lang en hidden">${role.labelEn}</span>
-            </span>
-          </div>
-          <div class="pub-meta">${formatAuthors(c.authors)}<br><em>${c.venue}</em>, ${c.cite}</div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  if (papers.length === 0) {
-    pl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">—</p>';
-  } else {
-    pl.innerHTML = papers.map(p => {
-      const role = authorRole(p.authors);
-      return `
-      <div class="pub-item">
-        <div class="pub-date">${p.year}</div>
-        <div class="pub-content">
-          <div class="pub-title-row">
-            <span class="pub-title">${p.title}</span>
-            <span class="role-badge ${role.cls}">
-              <span class="lang ja">${role.label}</span>
-              <span class="lang en hidden">${role.labelEn}</span>
-            </span>
-          </div>
-          <div class="pub-meta">${formatAuthors(p.authors)}<br><em>${p.journal}</em></div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  al.innerHTML = awards.map(a => `
-    <div class="award-item">
-      <span class="award-date">${a.date}</span>
-      <span class="award-title">
-        <span class="lang ja" style="display:block;">${a.titleJa}</span>
-        <span class="lang en hidden" style="display:block;">${a.titleEn}</span>
-      </span>
-    </div>`).join('');
-}
-
-/* ── TABS ── */
-function showPubTab(id, btn) {
-  document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.pub-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-}
-
-/* ── MOBILE DRAWER ── */
-function toggleDrawer() {
-  const drawer = document.getElementById('navDrawer');
-  const btn    = document.getElementById('hamburger');
-  const isOpen = drawer.classList.toggle('open');
-  btn.classList.toggle('open', isOpen);
-}
-
-function closeDrawer() {
-  document.getElementById('navDrawer').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-
-}
-
-// ドロワー外タップで閉じる
-document.addEventListener('click', e => {
-  const drawer = document.getElementById('navDrawer');
-  const btn    = document.getElementById('hamburger');
-  if (drawer.classList.contains('open') &&
-      !drawer.contains(e.target) && !btn.contains(e.target)) {
-    closeDrawer();
-  }
-});
-
-/* ── LANGUAGE ── */
-let lang = 'ja';
-function toggleLanguage() {
-  lang = lang === 'ja' ? 'en' : 'ja';
-  const isEn = lang === 'en';
-  document.querySelectorAll('.lang.ja').forEach(el => el.classList.toggle('hidden', isEn));
-  document.querySelectorAll('.lang.en').forEach(el => el.classList.toggle('hidden', !isEn));
-  document.documentElement.lang = lang;
-  document.getElementById('langBtn').textContent = isEn ? 'JA' : 'EN';
-}
-
-/* ── THEME ── */
-function toggleTheme() {
-  const isDark = document.body.dataset.theme === 'dark';
-  document.body.dataset.theme = isDark ? '' : 'dark';
-  document.getElementById('themeBtn').textContent = isDark ? '◑' : '◕';
-}
-
-/* ── INIT ── */
-renderPublications();
-
-/* ── HOLOGRAPHIC CANVAS ── */
-(function() {
-  const canvas = document.getElementById('holo-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, t = 0;
-  let mx = 0.5, my = 0.5;
-
-  function resize() {
-    W = canvas.offsetWidth;
-    H = canvas.offsetHeight;
-    canvas.width  = W;
-    canvas.height = H;
-  }
-
-  // Two coherent point sources — interference pattern like holography
-  function draw() {
-    t += 0.008;
-    ctx.clearRect(0, 0, W, H);
-
-    // Dark base
-    ctx.fillStyle = '#0d0d10';
-    ctx.fillRect(0, 0, W, H);
-
-    const imgData = ctx.createImageData(W, H);
-    const d = imgData.data;
-
-    // Source positions that drift slowly + follow mouse
-    const s1x = W * (0.28 + 0.06 * Math.sin(t * 0.7) + (mx - 0.5) * 0.08);
-    const s1y = H * (0.45 + 0.04 * Math.cos(t * 0.5));
-    const s2x = W * (0.72 + 0.05 * Math.cos(t * 0.6) + (mx - 0.5) * 0.08);
-    const s2y = H * (0.55 + 0.06 * Math.sin(t * 0.8) + (my - 0.5) * 0.06);
-
-    const k = 0.045;
-
-    for (let y = 0; y < H; y += 2) {
-      for (let x = 0; x < W; x += 2) {
-        const r1 = Math.sqrt((x - s1x) ** 2 + (y - s1y) ** 2);
-        const r2 = Math.sqrt((x - s2x) ** 2 + (y - s2y) ** 2);
-
-        // Interference: cos of path difference
-        const phase = k * (r1 - r2) + t * 0.3;
-        const I = 0.5 + 0.5 * Math.cos(phase);
-
-        // Chromatic dispersion — slight wavelength shift per channel
-        const phaseR = k * 0.97 * (r1 - r2) + t * 0.28;
-        const phaseG = k * 1.00 * (r1 - r2) + t * 0.30;
-        const phaseB = k * 1.04 * (r1 - r2) + t * 0.33;
-
-        const iR = (0.5 + 0.5 * Math.cos(phaseR));
-        const iG = (0.5 + 0.5 * Math.cos(phaseG));
-        const iB = (0.5 + 0.5 * Math.cos(phaseB));
-
-        // Radial fade from center
-        const cx = x / W - 0.5, cy = y / H - 0.5;
-        const fade = Math.max(0, 1 - (cx*cx + cy*cy) * 3.2);
-
-        const base = 8; // low ambient so dark background stays dark
-        const amp  = 70;
-
-        const r = Math.round(base + iR * amp * fade);
-        const g = Math.round(base + iG * amp * fade * 1.1);
-        const b = Math.round(base + iB * amp * fade * 1.4); // teal bias
-
-        const i4 = (y * W + x) * 4;
-        // Fill 2x2 block for performance
-        for (let dy = 0; dy < 2 && y+dy < H; dy++) {
-          for (let dx = 0; dx < 2 && x+dx < W; dx++) {
-            const j = ((y+dy) * W + (x+dx)) * 4;
-            d[j]   = r;
-            d[j+1] = g;
-            d[j+2] = b;
-            d[j+3] = 255;
-          }
-        }
-      }
-    }
-
-    ctx.putImageData(imgData, 0, 0);
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { resize(); });
-  canvas.parentElement.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mx = (e.clientX - rect.left) / rect.width;
-    my = (e.clientY - rect.top)  / rect.height;
-  });
-
-  resize();
-  draw();
-})();
-</script>
+<script src="js/shared.js"></script>
+<script src="js/publications.js"></script>
+<script src="js/holo-canvas.js"></script>
 
 </body>
 </html>
