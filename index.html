@@ -815,15 +815,18 @@ footer {
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 .nav-drawer {
-  display: none;
-  position: fixed;
-  top: 56px;
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  z-index: 899;
-  padding: 8px 0 16px;
+    display: none;
+    position: fixed;
+    top: 56px;
+    right: 0;
+    left: auto;
+    width: 220px;
+    max-width: 80vw;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    z-index: 899;
+    padding: 8px 0 16px;
 }
 
 .nav-drawer.open { display: block; }
@@ -1413,14 +1416,12 @@ function toggleDrawer() {
   const btn    = document.getElementById('hamburger');
   const isOpen = drawer.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
-  // スクロール封じ
-  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 function closeDrawer() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
-  document.body.style.overflow = '';
+
 }
 
 // ドロワー外タップで閉じる
