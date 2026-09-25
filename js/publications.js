@@ -7,11 +7,18 @@
    awards[]       → 受賞
    ═══════════════════════════════════════════════ */
 
-const MY_NAME = "Makoto Oikawa";
+const MY_NAME = ["Makoto Oikawa","及川 真琴"];
 
 /* ── DATA ── */
 
 const conferences = [
+  {
+    authors: "及川 真琴，吉川 浩，山口 健",
+    title:   "透過型液晶パネルにおける14Kホログラフィックステレオグラムのリアルタイム表示",
+    venue:   "映像情報メディア学会技術報告",
+    cite:    "Vol. 50, No. 25, pp. 46-49",
+    date:    "Sep. 2026"
+  },
   {
     authors: "Hiroshi Yoshikawa, Makoto Oikawa and Takeshi Yamaguchi",
     title:   "Real-time calculation and display of 14K rainbow hologram on transmission liquid crystal panel",
@@ -46,14 +53,20 @@ const awards = [
 /* ── HELPERS ── */
 
 function formatAuthors(authors) {
-  return authors.replace(
-    MY_NAME,
-    `<strong style="color:var(--ink)">${MY_NAME}</strong>`
-  );
+  let formatted = authors;
+
+  MY_NAME.forEach(name =>{
+    formatted = formatted.replace(
+      name,
+    `<strong style="color:var(--ink)">${name}</strong>`
+    );
+  });
+
+  return formatted;
 }
 
 function authorRole(authors) {
-  return authors.trimStart().startsWith(MY_NAME)
+  return MY_NAME.some(name => authors.trimStart().startsWith(name))
     ? { label: '筆頭著者', labelEn: 'First Author', cls: 'role-first' }
     : { label: '共著',     labelEn: 'Co-Author',    cls: 'role-co'    };
 }
